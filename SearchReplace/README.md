@@ -25,4 +25,6 @@ java -Xmx11264m -jar build/libs/SearchReplace.jar --fileType txt --searchString 
 
 ```
 
-For a detailed explanation on how things work, check out the [guide](https://imperceptiblethoughts.com/shadow/introduction/#benefits-of-shadow) for shadow jar
+For a detailed explanation on working of Shadow Jar, check out the [guide](https://imperceptiblethoughts.com/shadow/introduction/#benefits-of-shadow) for shadow jar
+
+For gradle and lombok the setup links provide the informatioon
