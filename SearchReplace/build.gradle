@@ -39,12 +39,11 @@ shadowJar {
   mergeServiceFiles()
   exclude 'META-INF/*.DSA'
   exclude 'META-INF/*.RSA'
-  include 'spring.*'
 }
 
 jar {
   manifest {
-    attributes 'Main-Class': 'com.shadow.text.SearchReplaceMain'
+    attributes 'Main-Class': 'com.company.searchtext.SearchReplaceMain'
   }
 }
 
