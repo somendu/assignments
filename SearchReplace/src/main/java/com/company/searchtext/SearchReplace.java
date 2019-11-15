@@ -44,6 +44,7 @@ public class SearchReplace implements Runnable {
 	@Getter
 	@Setter
 	private String sourceFile;
+
 	@Getter
 	@Setter
 	private String targetFile;
