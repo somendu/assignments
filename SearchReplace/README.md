@@ -17,11 +17,11 @@ Setup [Lombok](https://projectlombok.org/download)
 gradle --console=plain shadowJar
 
 # command line for XML File
-java -jar build/libs/SearchReplace.jar --fileType xml --searchString trace --replaceString error --sourceFile fileplace/configuration.xml --targetFile fileplace/result.xml
+java -Xmx11264m -jar build/libs/SearchReplace.jar --fileType xml --searchString trace --replaceString error --sourceFile fileplace/configuration.xml --targetFile fileplace/result.xml
 
 
 # command line for Text File
-java -jar build/libs/SearchReplace.jar --fileType txt --searchString customer --replaceString client --sourceFile fileplace/manifest.txt --targetFile fileplace/result.txt
+java -Xmx11264m -jar build/libs/SearchReplace.jar --fileType txt --searchString customer --replaceString client --sourceFile fileplace/manifest.txt --targetFile fileplace/result.txt
 
 ```
 
