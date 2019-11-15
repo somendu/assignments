@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.shadow.text.exception;
+package com.company.searchtext.exception;
 
 /**
  * 

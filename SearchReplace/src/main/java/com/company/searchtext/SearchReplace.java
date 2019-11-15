@@ -1,4 +1,4 @@
-package com.shadow.text;
+package com.company.searchtext;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -10,9 +10,9 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
-import com.shadow.text.exception.FileExtensionException;
-import com.shadow.text.exception.FileTypeException;
-import com.shadow.text.service.ReadFileService;
+import com.company.searchtext.exception.FileExtensionException;
+import com.company.searchtext.exception.FileTypeException;
+import com.company.searchtext.service.ReadFileService;
 
 import lombok.Getter;
 import lombok.Setter;

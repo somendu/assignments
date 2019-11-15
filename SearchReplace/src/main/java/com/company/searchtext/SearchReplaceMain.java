@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.shadow.text;
+package com.company.searchtext;
 
 import java.io.IOException;
 

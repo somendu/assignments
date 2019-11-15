@@ -1,4 +1,4 @@
-package com.shadow.text.support;
+package com.company.searchtext.support;
 
 import org.apache.commons.io.FilenameUtils;
 
