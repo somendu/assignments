@@ -1,0 +1,4 @@
+
+java -jar build/libs/SearchReplace.jar --fileType xml --searchString trace --replaceString error --sourceFile fileplace/configuration.xml --targetFile fileplace/result.xml
+
+java -jar build/libs/SearchReplace.jar --fileType txt --searchString customer --replaceString client --sourceFile fileplace/manifest.txt --targetFile fileplace/result.txt
