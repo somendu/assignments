@@ -1,4 +1,4 @@
-package com.shadow.text;
+package com.company.searchtext;
 
 import static org.junit.Assert.assertFalse;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.shadow.text.service.ReadFileService;
+import com.company.searchtext.service.ReadFileService;
 
 public class SearchReplaceTest {
 

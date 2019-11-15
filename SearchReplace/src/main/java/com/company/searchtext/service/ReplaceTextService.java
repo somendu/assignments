@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.shadow.text.service;
+package com.company.searchtext.service;
 
 /**
  * 

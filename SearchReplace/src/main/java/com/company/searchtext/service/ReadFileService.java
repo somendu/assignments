@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.shadow.text.service;
+package com.company.searchtext.service;
 
 import java.io.IOException;
 
@@ -12,8 +12,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.apache.commons.io.FilenameUtils;
 import org.xml.sax.SAXException;
 
-import com.shadow.text.exception.FileExtensionException;
-import com.shadow.text.exception.FileTypeException;
+import com.company.searchtext.exception.FileExtensionException;
+import com.company.searchtext.exception.FileTypeException;
 
 /**
  * 
