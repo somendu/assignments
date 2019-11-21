@@ -14,8 +14,20 @@ public class FrogJmp {
 	 */
 	public static void main(String[] args) {
 
-		System.out.println(getMinJump(10, 85, 20));
+		System.out.println(getMinJump(10, 85, 30));
 
+	}
+
+	public static double getMinJumpLoop(int X, int Y, int D) {
+
+		int minJump = 0;
+
+		for (int count = X; count < Y;) {
+			count = count + D;
+			minJump++;
+		}
+
+		return minJump;
 	}
 
 	public static double getMinJump(int X, int Y, int D) {
@@ -26,5 +38,4 @@ public class FrogJmp {
 
 		return minJump;
 	}
-
 }

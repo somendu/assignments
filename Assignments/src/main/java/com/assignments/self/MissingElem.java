@@ -16,7 +16,8 @@ public class MissingElem {
 
 		int[] A = { 3, 2, 4, 6, 1, 8, 5 };
 
-		System.out.println("Final : " + missingElementNew(A));
+//		System.out.println("missingElementNew : " + missingElementNew(A));
+		System.out.println("getMissingNumber : " + getMissingNumber(A));
 
 	}
 
@@ -37,6 +38,18 @@ public class MissingElem {
 		}
 
 		return missingElem;
+	}
+
+	private static int getMissingNumber(int[] numbers) {
+
+		int totalCount = numbers.length + 1;
+
+		int expectedSum = totalCount * ((totalCount + 1) / 2);
+		int actualSum = 0;
+		for (int i : numbers) {
+			actualSum += i;
+		}
+		return expectedSum - actualSum;
 	}
 
 	public static int missingElementNew(int[] A) {

@@ -39,6 +39,7 @@ public class Decode {
 			if (Integer.parseInt(sArray[i - 2]) == Integer.parseInt("1")
 					|| Integer.parseInt(sArray[i - 2]) == Integer.parseInt("2")
 							&& Integer.parseInt(sArray[i - 1]) < Integer.parseInt("7"))
+
 				countArray[i] += countArray[i - 2];
 		}
 
