@@ -3,8 +3,8 @@
  */
 package com.assignments.self;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,7 +28,7 @@ public class ArrayInt {
 
 		int size = intArray.length;
 
-		List<Integer> changedList = new ArrayList<Integer>();
+		List<Integer> changedList = new LinkedList<Integer>();
 
 		for (int innerInt : intArray) {
 
