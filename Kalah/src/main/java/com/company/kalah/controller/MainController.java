@@ -1,7 +1,5 @@
 package com.company.kalah.controller;
 
-import java.io.IOException;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.kalah.exception.GameNotFoundException;
 import com.company.kalah.service.KalahService;
+import com.company.kalah.support.GameConstant;
 import com.company.kalah.support.GameCreation;
 import com.company.kalah.support.GameMove;
 
@@ -50,8 +49,8 @@ public class MainController {
 			System.out.println("File Here");
 			System.out.println("searchText : " + searchText);
 			System.out.println("replaceText : " + replaceText);
-			mainControllerService.saveUploadedFile(file);
-		} catch (IOException e) {
+
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
@@ -74,13 +73,27 @@ public class MainController {
 
 	@PutMapping("/games/{gameId}/pits/{pitId}")
 	@ApiOperation(value = "Play Game", notes = "Game to be Played with ID and URL", response = ResponseEntity.class)
-	public ResponseEntity<?> playGame(@PathVariable("gameId") String gameId, @PathVariable("pitId") String pitId) {
+	public ResponseEntity<?> playGame(@PathVariable("gameId") String gameId, @PathVariable("pitId") int pitId) {
 
 		// PUT Mapping for game id to return moves
 
 		GameMove gameMove = new GameMove();
 		try {
+
+			// Check pit id
+
+			if (pitId > GameConstant.PIT_END_ID || pitId < GameConstant.PIT_START_ID) {
+
+				return new ResponseEntity<>("Pit ID should be between 1 and 14", HttpStatus.BAD_REQUEST);
+			}
+
+			if (pitId == GameConstant.PIT_HOUSE_1 || pitId == GameConstant.PIT_HOUSE_2) {
+
+				return new ResponseEntity<>("House ID should be used within Game", HttpStatus.BAD_REQUEST);
+			}
+
 			gameMove = mainControllerService.getMove(gameId, pitId);
+
 		} catch (GameNotFoundException e) {
 			// TODO Auto-generated catch block
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

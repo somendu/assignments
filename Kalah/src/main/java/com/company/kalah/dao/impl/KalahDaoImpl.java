@@ -60,7 +60,7 @@ public class KalahDaoImpl implements KalahDao {
 		GameCreation gameCreation = gameCreationMap.get(Integer.parseInt(gameId));
 
 		if (gameCreation == null) {
-			throw new GameNotFoundException("Game is not found for the id: " + gameId);
+			throw new GameNotFoundException("Game " + gameId + " is not found");
 		}
 		return gameCreation;
 	}

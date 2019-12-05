@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class KeyValue {
 
-	private String pitId;
+	private int pitId;
 
-	private String numberOfStones;
+	private int numberOfStones;
 }
