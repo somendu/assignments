@@ -8,7 +8,6 @@ package com.assignments.self.arrays;
  *
  */
 public class ArrayPosition {
-
 	/**
 	 * @param args
 	 */
@@ -25,12 +24,23 @@ public class ArrayPosition {
 		intArray[3] = 8;
 		intArray[4] = 9;
 
+		// Printing before
+		System.out.println("Before");
+		for (int counter = 0; counter < intArray.length; counter++) {
+
+			System.out.println(intArray[counter]);
+		}
+
+		System.out.println("");
+
 		// Call method to insert element in particular position
 		intArray = insertElement(intArray, 2, 10);
 
-		// Printing
-		for (int i = 0; i < intArray.length; i++) {
-			System.out.println(intArray[i]);
+		// Printing After
+		System.out.println("After");
+		for (int counter = 0; counter < intArray.length; counter++) {
+
+			System.out.println(intArray[counter]);
 		}
 
 	}
@@ -53,10 +63,10 @@ public class ArrayPosition {
 			modArray[innnerCount] = intArray[innnerCount];
 		}
 
-		// Remaining element looop
+		// Remaining element loop
 		for (int remainCount = position + 1; remainCount < modArray.length; remainCount++) {
 
-			// Take the position of new elemen
+			// Take the position of new element
 			modArray[position] = element;
 
 			// insert remaning elements
