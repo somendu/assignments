@@ -56,24 +56,24 @@ public class ArrayPosition {
 	private static int[] insertElement(int[] intArray, int position, int element) {
 
 		// Declare size of array as +1
-		int[] modArray = new int[intArray.length + 1];
+		// intArray = new int[intArray.length + 1];
 
 		// Insert first elements
-		for (int innnerCount = 0; innnerCount < position; innnerCount++) {
-			modArray[innnerCount] = intArray[innnerCount];
-		}
+//		for (int innnerCount = 0; innnerCount < position; innnerCount++) {
+//			modArray[innnerCount] = intArray[innnerCount];
+//		}
 
 		// Remaining element loop
-		for (int remainCount = position + 1; remainCount < modArray.length; remainCount++) {
+		for (int remainCount = position; remainCount <= intArray.length; remainCount++) {
 
 			// Take the position of new element
-			modArray[position] = element;
+			intArray[position] = element;
 
-			// insert remaning elements
-			modArray[remainCount] = intArray[remainCount - 1];
+			// insert remaining elements
+			intArray[remainCount] = intArray[remainCount + 1];
 		}
 
-		return modArray;
+		return intArray;
 
 	}
 
