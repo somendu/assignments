@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "asses.api")
-public class AssessApi {
+public class AssessProperties {
 
 	private String server;
 	private String port;

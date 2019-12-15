@@ -4,12 +4,15 @@
 package com.company.assessment.service.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.company.assessment.config.AssessApi;
+import com.company.assessment.config.AssessProperties;
 import com.company.assessment.service.ShipmentService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,22 +24,44 @@ import lombok.RequiredArgsConstructor;
  * @author somendu
  *
  */
-@Component
+@Service
 @RequiredArgsConstructor
 public class ShipmentServiceImpl implements ShipmentService {
 
 	private final RestTemplate restTemplate;
 
-	private final AssessApi assessApi;
+	private final AssessProperties assessApi;
+
+	// Store the value in static (as a queue)
+	private static final List<String> shipmentsList = new ArrayList<String>();
 
 	@Override
 	public JSONObject getShipments(String shipments) throws IOException, InterruptedException {
 
-		var shipmentObjects = restTemplate.getForObject(
-				assessApi.getServer() + ":" + assessApi.getPort() + assessApi.getShipments() + "?q=" + shipments,
-				String.class);
+		// Storing for keeping in queue
+		String[] pricingArray = shipments.split(",");
 
-		JSONObject jsonObject = new JSONObject(shipmentObjects);
+		for (String string : pricingArray) {
+			if (!string.equalsIgnoreCase("")) {
+				shipmentsList.add(string);
+			}
+		}
+
+		JSONObject jsonObject = new JSONObject();
+
+		// Need to pass the comma (,) separated value
+		String result = shipmentsList.stream().map(s -> String.valueOf(s)).collect(Collectors.joining(","));
+
+		if (pricingArray.length >= 5 || shipmentsList.size() >= 5)
+
+		{
+			var shipmentObjects = restTemplate.getForObject(
+					assessApi.getServer() + ":" + assessApi.getPort() + assessApi.getShipments() + "?q=" + result,
+					String.class);
+			jsonObject = new JSONObject(shipmentObjects);
+
+			shipmentsList.clear();
+		}
 
 		return jsonObject;
 	}

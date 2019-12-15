@@ -1,22 +1,25 @@
 /**
  * 
  */
-package com.company.assessment.utills;
+package com.company.assessment;
 
+import static org.junit.Assert.assertEquals;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.junit.Test;
 
 /**
  * @author somendu
  *
  */
-public class TestCode {
+public class AssessTest {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	@Test
+	public void testStringList() throws URISyntaxException {
 
 		List<String> pricingList = new ArrayList<String>();
 
@@ -24,12 +27,9 @@ public class TestCode {
 		pricingList.add("R");
 		pricingList.add("S");
 
-//		JSONObject jsonObject = new JSONObject(trackString);
-
 		String result = pricingList.stream().map(s -> String.valueOf(s)).collect(Collectors.joining(","));
 
-		System.out.println(result);
+		assertEquals("Q,R,S", result);
 
 	}
-
 }

@@ -36,6 +36,9 @@ dependencies {
 
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
 
+	implementation group: 'org.aspectj', name: 'aspectjtools', version: '1.6.2'
+
+
 
 	//Swagger API   
 	

@@ -6,10 +6,10 @@ package com.company.assessment.service.impl;
 import java.io.IOException;
 
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.company.assessment.config.AssessApi;
+import com.company.assessment.config.AssessProperties;
 import com.company.assessment.service.TrackService;
 
 import lombok.RequiredArgsConstructor;
@@ -21,13 +21,13 @@ import lombok.RequiredArgsConstructor;
  * @author somendu
  *
  */
-@Component
+@Service
 @RequiredArgsConstructor
 public class TrackServiceImpl implements TrackService {
 
 	private final RestTemplate restTemplate;
 
-	private final AssessApi assessApi;
+	private final AssessProperties assessApi;
 
 	@Override
 	public JSONObject getTrack(String track) throws IOException, InterruptedException {
