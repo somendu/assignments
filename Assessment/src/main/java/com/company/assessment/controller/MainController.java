@@ -90,10 +90,10 @@ public class MainController {
 	}
 
 	/**
-	 * Scheduled call å
+	 * Scheduled call
 	 */
 	@Scheduled(fixedRate = 5000)
-	public void callThread() {
+	public void callRequest() {
 
 		long diff = (System.currentTimeMillis() - startTime);
 
