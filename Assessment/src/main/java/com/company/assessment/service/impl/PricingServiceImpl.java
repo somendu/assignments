@@ -58,6 +58,7 @@ public class PricingServiceImpl implements PricingService {
 					String.class);
 
 			jsonObject = new JSONObject(pricingStringResult);
+
 			// Since cap of 5 so clear the list when more than 5 values
 			pricingList.clear();
 

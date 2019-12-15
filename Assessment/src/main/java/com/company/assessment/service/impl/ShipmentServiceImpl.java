@@ -58,8 +58,10 @@ public class ShipmentServiceImpl implements ShipmentService {
 			var shipmentObjects = restTemplate.getForObject(
 					assessApi.getServer() + ":" + assessApi.getPort() + assessApi.getShipments() + "?q=" + result,
 					String.class);
+
 			jsonObject = new JSONObject(shipmentObjects);
 
+			// Since cap of 5 so clear the list when more than 5 values
 			shipmentsList.clear();
 		}
 

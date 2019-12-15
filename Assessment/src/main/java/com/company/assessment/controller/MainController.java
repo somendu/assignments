@@ -42,9 +42,6 @@ public class MainController {
 
 	private long startTime = System.currentTimeMillis();
 
-	@PostMapping("/aggregation")
-	@ApiOperation(value = "Aggregation Api", notes = "The combined api result", response = ResponseEntity.class)
-
 	/**
 	 * Aggregation end point
 	 * 
@@ -53,6 +50,8 @@ public class MainController {
 	 * @param shipments
 	 * @return
 	 */
+	@PostMapping("/aggregation")
+	@ApiOperation(value = "Aggregation Api", notes = "The combined api result", response = ResponseEntity.class)
 	public ResponseEntity<?> getAggregation(@RequestParam(name = "pricing", required = false) String pricing,
 			@RequestParam(name = "track", required = false) String track,
 			@RequestParam(name = "shipments", required = false) String shipments) {
@@ -80,6 +79,8 @@ public class MainController {
 				resultMap.put("shipments", shipmentCompletable.get().toMap());
 			}
 
+			CompletableFuture.allOf(pricingCompletable, trackCompletable, shipmentCompletable).join();
+
 		} catch (IOException | InterruptedException | ExecutionException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
@@ -88,6 +89,9 @@ public class MainController {
 
 	}
 
+	/**
+	 * Scheduled call å
+	 */
 	@Scheduled(fixedRate = 5000)
 	public void callThread() {
 

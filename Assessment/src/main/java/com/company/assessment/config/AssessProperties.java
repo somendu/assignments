@@ -24,4 +24,5 @@ public class AssessProperties {
 	private String shipments;
 	private String track;
 	private String pricing;
+
 }

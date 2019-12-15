@@ -61,6 +61,7 @@ public class TrackServiceImpl implements TrackService {
 
 			jsonObject = new JSONObject(tracking);
 
+			// Since cap of 5 so clear the list when more than 5 values
 			trackList.clear();
 		}
 
