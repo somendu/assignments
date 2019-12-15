@@ -50,7 +50,7 @@ public class PricingServiceImpl implements PricingService {
 		// Need to pass the comma (,) separated value
 		String pricingString = pricingList.stream().map(s -> String.valueOf(s)).collect(Collectors.joining(","));
 
-		if (pricingArray.length >= 5)
+		if (pricingArray.length >= 5 || pricingList.size() >= 5)
 
 		{
 			var pricingStringResult = restTemplate.getForObject(
@@ -58,17 +58,9 @@ public class PricingServiceImpl implements PricingService {
 					String.class);
 
 			jsonObject = new JSONObject(pricingStringResult);
-
-			return jsonObject;
-		} else if (pricingList.size() >= 5) {
-			var pricingStringResult = restTemplate.getForObject(
-					assessApi.getServer() + ":" + assessApi.getPort() + assessApi.getPricing() + "?q=" + pricingString,
-					String.class);
-
-			jsonObject = new JSONObject(pricingStringResult);
-
 			// Since cap of 5 so clear the list when more than 5 values
 			pricingList.clear();
+
 		}
 
 		return jsonObject;

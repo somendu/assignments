@@ -39,9 +39,9 @@ public class ShipmentServiceImpl implements ShipmentService {
 	public JSONObject getShipments(String shipments) throws IOException, InterruptedException {
 
 		// Storing for keeping in queue
-		String[] pricingArray = shipments.split(",");
+		String[] shipmentArray = shipments.split(",");
 
-		for (String string : pricingArray) {
+		for (String string : shipmentArray) {
 			if (!string.equalsIgnoreCase("")) {
 				shipmentsList.add(string);
 			}
@@ -52,7 +52,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 		// Need to pass the comma (,) separated value
 		String result = shipmentsList.stream().map(s -> String.valueOf(s)).collect(Collectors.joining(","));
 
-		if (pricingArray.length >= 5 || shipmentsList.size() >= 5)
+		if (shipmentArray.length >= 5 || shipmentsList.size() >= 5)
 
 		{
 			var shipmentObjects = restTemplate.getForObject(
