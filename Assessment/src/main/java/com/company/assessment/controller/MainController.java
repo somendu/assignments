@@ -57,12 +57,7 @@ public class MainController {
 			@RequestParam(name = "track", required = false) String track,
 			@RequestParam(name = "shipments", required = false) String shipments) {
 
-		// TODO These string will combine to for json
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-
-		JSONObject pricingObject = new JSONObject();
-		JSONObject trackObject = new JSONObject();
-		JSONObject shipmentsObject = new JSONObject();
 
 		CompletableFuture<JSONObject> pricingCompletable = new CompletableFuture<JSONObject>();
 		CompletableFuture<JSONObject> trackCompletable = new CompletableFuture<JSONObject>();
@@ -70,32 +65,17 @@ public class MainController {
 
 		try {
 
-			// TODO Call Pricing API using resttemplate
 			if (pricing != null) {
-
-//				pricingObject = pricingService.getPricing(pricing);
-//				apiMap.put("pricing", pricingObject.toMap());
-
 				pricingCompletable = asyncService.getPricing(pricing);
 				resultMap.put("pricing", pricingCompletable.get().toMap());
 			}
 
-			// TODO Call Track API using resttemplate
 			if (track != null) {
-//				trackObject = trackService.getTrack(track);
-//				apiMap.put("track", trackObject.toMap());
-
 				trackCompletable = asyncService.getTrack(track);
 				resultMap.put("track", trackCompletable.get().toMap());
-
 			}
 
-			// TODO Call Shipment API using resttemplate
-			// TODO Need to set timer
 			if (shipments != null) {
-//				shipmentsObject = shipmentService.getShipments(shipments);
-//				apiMap.put("shipments", shipmentsObject.toMap());
-
 				shipmentCompletable = asyncService.getShipments(shipments);
 				resultMap.put("shipments", shipmentCompletable.get().toMap());
 			}
