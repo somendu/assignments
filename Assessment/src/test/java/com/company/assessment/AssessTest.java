@@ -5,7 +5,6 @@ package com.company.assessment;
 
 import static org.junit.Assert.assertEquals;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ import org.junit.Test;
 public class AssessTest {
 
 	@Test
-	public void testStringList() throws URISyntaxException {
+	public void testStringList() {
 
 		List<String> pricingList = new ArrayList<String>();
 
@@ -32,4 +31,5 @@ public class AssessTest {
 		assertEquals("Q,R,S", result);
 
 	}
+
 }
