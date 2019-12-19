@@ -18,6 +18,7 @@ public class DuplicateChar {
 	 */
 	public static void main(String[] args) {
 
+		System.out.println(getFirstNonRepeatedChar("sdhuuisdhfdhkdsf"));
 	}
 
 	public static char getFirstNonRepeatedChar(String str) {

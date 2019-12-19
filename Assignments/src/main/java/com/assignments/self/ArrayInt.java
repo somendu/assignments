@@ -26,8 +26,6 @@ public class ArrayInt {
 
 	private static int[] changeIntArray(int[] intArray) {
 
-		int size = intArray.length;
-
 		List<Integer> changedList = new LinkedList<Integer>();
 
 		for (int innerInt : intArray) {
