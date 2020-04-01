@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class WebArithmeticController {
+public class WebProductController {
 	@Autowired
-	protected WebCustomerService additionService;
+	protected WebCustomerService customerService;
 
 	@Autowired
-	protected WebAdminService subtractionService;
+	protected WebAdminService adminService;
 
-	protected Logger logger = Logger.getLogger(WebArithmeticController.class
+	protected Logger logger = Logger.getLogger(WebProductController.class
 			.getName());
 
-	public WebArithmeticController(WebCustomerService additionService, WebAdminService subtractionService) {
-		this.additionService = additionService;
-		this.subtractionService = subtractionService;
+	public WebProductController(WebCustomerService customerService, WebAdminService adminService) {
+		this.customerService = customerService;
+		this.adminService = adminService;
 	}
 
 	@RequestMapping("/add")
@@ -29,7 +29,7 @@ public class WebArithmeticController {
 			@RequestParam(defaultValue="0") String addend2,
 			Model model) {
 
-		String sum = additionService.add(addend1, addend2);
+		String sum = customerService.add(addend1, addend2);
 
 		logger.info("Sum: " + sum);
 		model.addAttribute("json", sum);
@@ -42,7 +42,7 @@ public class WebArithmeticController {
 			@RequestParam(defaultValue="0") String subtrahend,
 			Model model) {
 
-		String difference = subtractionService.subtract(minuend, subtrahend);
+		String difference = adminService.subtract(minuend, subtrahend);
 
 		logger.info("Difference: " + difference);
 		model.addAttribute("json", difference);

@@ -13,9 +13,9 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan(useDefaultFilters = false)
 public class WebServer {
 
-	public static final String ADDITION_SERVICE_URL = "http://addition-service";
+	public static final String CUSTOMER_SERVICE_URL = "http://customer-service";
 
-	public static final String SUBTRACTION_SERVICE_URL = "http://subtraction-service";
+	public static final String ADMIN_SERVICE_URL = "http://admin-service";
 
 	public static void main(String[] args) {
 		System.setProperty("spring.config.name", "web-server");
@@ -29,18 +29,18 @@ public class WebServer {
 	}
 
 	@Bean
-	public WebCustomerService additionService() {
-		return new WebCustomerService(ADDITION_SERVICE_URL);
+	public WebCustomerService customerService() {
+		return new WebCustomerService(CUSTOMER_SERVICE_URL);
 	}
 
 	@Bean
-	public WebArithmeticController additionController() {
-		return new WebArithmeticController(additionService(), subtractionService());
+	public WebProductController productController() {
+		return new WebProductController(customerService(), subtractionService());
 	}
 
 	@Bean
 	public WebAdminService subtractionService() {
-		return new WebAdminService(SUBTRACTION_SERVICE_URL);
+		return new WebAdminService(ADMIN_SERVICE_URL);
 	}
 
 	@Bean

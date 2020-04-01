@@ -19,4 +19,5 @@ public class CustomerServer {
 
 		SpringApplication.run(CustomerServer.class, args);
 	}
+
 }
