@@ -37,17 +37,18 @@ public class AdminController {
 
 		// AdminOrderService
 		// TODO Query prod_order table - get order id
-		// TODO Use order id to query order_items for product id and prod count
-
 		AdminOrders orderId = adminOrderService.getOrdersForAdmin(adminId);
+		orderId.setAdminId(adminId);
 
-		// StockService
-		// TODO Check order_stock table with product id and count to check count
-		// if above prod count is less than stock count
+		// TODO Use order id to query order_items for product id and prod count
+		adminOrderService.setOrderStock(orderId);
 
-		// AdminOrder Service
+//		stockService.checkCount
+
+		// AdminOrder Service //Stock Service
 		// TODO If count is less update order_stock table subtracting the order count
 		// and approve yes order_items table
+
 		// TODO If count is more, then approve N
 		return "";
 	}

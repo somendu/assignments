@@ -3,8 +3,6 @@
  */
 package com.product.ecommerce.rest.admin.model;
 
-import java.util.List;
-
 import lombok.Data;
 
 /**
@@ -14,9 +12,9 @@ import lombok.Data;
  * @since Apr 1, 2020
  */
 @Data
-public class AdminOrders {
+public class AdminOrderItem {
 
-	private String adminId;
-	private List<Integer> orderIdList;
-
+	private int productOrderId;
+	private int productId;
+	private int productCount;
 }

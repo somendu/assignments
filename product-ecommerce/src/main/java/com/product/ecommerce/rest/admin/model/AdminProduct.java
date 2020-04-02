@@ -14,9 +14,8 @@ import lombok.Data;
  * @since Apr 1, 2020
  */
 @Data
-public class AdminOrders {
+public class AdminProduct {
 
-	private String adminId;
-	private List<Integer> orderIdList;
-
+	private int productOrderId;
+	private List<AdminOrderItem> adminOrderItems;
 }

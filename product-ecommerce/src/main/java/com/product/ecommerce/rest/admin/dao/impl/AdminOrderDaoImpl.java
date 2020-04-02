@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.product.ecommerce.rest.admin.dao.AdminOrderDao;
+import com.product.ecommerce.rest.admin.model.AdminOrderItem;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,13 +34,36 @@ public class AdminOrderDaoImpl implements AdminOrderDao {
 
 	private final String adminOrderQuery = "SELECT i_prod_order_id prodOrderId FROM prod_order WHERE i_admin_id = ?";
 
+	private final String adminOrderItemQuery = "SELECT i_product_id productId, i_prod_count prodCount "
+			+ "FROM order_items WHERE i_prod_order_id = ? ";
+
+	private final String adminUpdateItemQuery = "UPDATE order_items SET c_approve_status = 'Y' "
+			+ "WHERE i_prod_order_id = ? AND i_product_id = ?";
+
 	@Override
 	public List<Map<String, Object>> getAdminOrderList(String adminId) {
 
-		// TODO Query prod_order table - get order id
+		// Query prod_order table - get order id
 		List<Map<String, Object>> adminOrderList = jdbcTemplate.queryForList(adminOrderQuery, adminId);
 
 		return adminOrderList;
 	}
 
+	@Override
+	public List<Map<String, Object>> getAdminOrderItemList(int orderId) {
+
+		List<Map<String, Object>> adminOrderList = jdbcTemplate.queryForList(adminOrderItemQuery, orderId);
+
+		return adminOrderList;
+
+	}
+
+	@Override
+	public int approveItem(AdminOrderItem adminOrderItem) {
+
+		int approvedReturn = jdbcTemplate.update(adminUpdateItemQuery, adminOrderItem.getProductOrderId(),
+				adminOrderItem.getProductId());
+
+		return approvedReturn;
+	}
 }
