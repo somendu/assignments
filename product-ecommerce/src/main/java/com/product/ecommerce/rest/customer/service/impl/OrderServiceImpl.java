@@ -15,7 +15,7 @@ import com.product.ecommerce.rest.customer.model.ProductWithCount;
 import com.product.ecommerce.rest.customer.service.OrderService;
 
 /**
- * <Description>
+ * Implementation class for order service
  * 
  * @author Somendu
  * @since Mar 31, 2020
@@ -27,12 +27,12 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
 
 	@Override
-	public void placeOrder(List<ProductWithCount> orderedProducts, String custId) {
+	public String placeOrder(List<ProductWithCount> orderedProducts, String custId) {
 
 		// Query admin details from admin table
 		AdminDetail adminDetail = orderDao.getAdminDetail();
 
-		// TODO Create insert for prod_order table
+		// Create insert for prod_order table
 		ProdOrder prodOrder = new ProdOrder();
 		prodOrder.setAdminId(adminDetail.getAdminId());
 		prodOrder.setCustId(Integer.parseInt(custId));
@@ -40,15 +40,13 @@ public class OrderServiceImpl implements OrderService {
 
 		int orderId = orderDao.getOrderId(prodOrder);
 
-		System.out.println("Order Id here " + orderId);
-
-		// TODO Create insert for order_items table - need to use the order id from
+		// insert for order_items table - need to use the order id from
 		// above table
 		int orderItemCount = orderDao.insertOrderItem(orderId, adminDetail.getAdminName(), orderedProducts);
 
-		// TODO Return a proper message that records inserted order is ready
+		// Return a proper message that records inserted order is placed
 
-		// orderDao.placeOrder(orderIdList);
+		return "Order Placed";
 
 	}
 

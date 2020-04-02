@@ -8,6 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * 
+ * Web Server setting each service configuration
+ * 
+ * @author Somendu
+ * @since Apr 2, 2020
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(useDefaultFilters = false)
@@ -34,17 +41,8 @@ public class WebServer {
 	}
 
 	@Bean
-	public WebProductController productController() {
-		return new WebProductController(customerService(), subtractionService());
-	}
-
-	@Bean
 	public WebAdminService subtractionService() {
 		return new WebAdminService(ADMIN_SERVICE_URL);
 	}
 
-	@Bean
-	public HomeController homeController() {
-		return new HomeController();
-	}
 }

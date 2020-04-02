@@ -9,7 +9,8 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * <Description>
+ * Product Order Bean. Single point for customer id and admin id with unique
+ * order id
  * 
  * @author Somendu
  * @since Mar 31, 2020

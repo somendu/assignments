@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import com.product.ecommerce.rest.admin.dao.StockDao;
 
 /**
- * <Description>
+ * Implementation class for stock
  * 
  * @author Somendu
  * @since Apr 1, 2020
@@ -23,7 +23,7 @@ public class StockDaoImpl implements StockDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	private final String stockCountQuery = "SELECT i_count stockCount FROM order_stock WHERE i_product_id = ?";
+	private final String stockCountQuery = "SELECT i_count stockCount FROM order_stock WHERE i_product_id = ? AND i_status > 0";
 
 	private final String stockUpdateQuery = "UPDATE order_stock SET i_admin_id = ?, i_count = ? "
 			+ "WHERE i_product_id = ?";

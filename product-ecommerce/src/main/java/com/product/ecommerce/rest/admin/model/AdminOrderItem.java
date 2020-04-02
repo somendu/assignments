@@ -6,7 +6,7 @@ package com.product.ecommerce.rest.admin.model;
 import lombok.Data;
 
 /**
- * <Description>
+ * Each product and its count which is ordered
  * 
  * @author Somendu
  * @since Apr 1, 2020

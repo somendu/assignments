@@ -7,6 +7,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * 
+ * Admin Services
+ * 
+ * @author Somendu
+ * @since Apr 2, 2020
+ */
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @ComponentScan

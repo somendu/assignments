@@ -6,7 +6,7 @@ package com.product.ecommerce.rest.customer.model;
 import lombok.Data;
 
 /**
- * <Description>
+ * Admin Details
  * 
  * @author Somendu
  * @since Mar 31, 2020

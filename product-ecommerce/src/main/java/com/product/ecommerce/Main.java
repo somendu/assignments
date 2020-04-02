@@ -5,7 +5,15 @@ import com.product.ecommerce.rest.admin.AdminServer;
 import com.product.ecommerce.rest.customer.CustomerServer;
 import com.product.ecommerce.web.WebServer;
 
+/**
+ * 
+ * The entry point class for setting services
+ * 
+ * @author Somendu
+ * @since Apr 2, 2020
+ */
 public class Main {
+
 	public static void main(String[] args) {
 
 		String serverName = "";

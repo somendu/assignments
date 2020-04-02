@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.product.ecommerce.rest.admin.dao.StockDao;
-import com.product.ecommerce.rest.admin.model.ProductStockCount;
+import com.product.ecommerce.rest.admin.model.ProductStock;
 import com.product.ecommerce.rest.admin.service.StockService;
 
 /**
- * <Description>
+ * Implementation class for stock service
  * 
  * @author Somendu
  * @since Apr 1, 2020
@@ -26,14 +26,15 @@ public class StockServiceImpl implements StockService {
 	private StockDao stockDao;
 
 	@Override
-	public ProductStockCount getStockCount(int productId) {
+	public ProductStock getStockCount(int productId) {
 
+		// Get the stock count for the product
 		Map<String, Object> stockMap = stockDao.getStockCount(productId);
 
-		ProductStockCount productStockCount = new ProductStockCount();
+		ProductStock productStockCount = new ProductStock();
 
 		productStockCount.setProductId(productId);
-		productStockCount.setStockCount(((BigDecimal) stockMap.get("stockCount")).intValue());
+		productStockCount.setAvailableStock(((BigDecimal) stockMap.get("stockCount")).intValue());
 
 		return productStockCount;
 	}
@@ -41,6 +42,7 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public int updateStock(int adminId, int stockUpdateCount, int productId) {
 
+		// Update the stock count
 		int stockUpdate = stockDao.updateStockCount(adminId, stockUpdateCount, productId);
 
 		return stockUpdate;

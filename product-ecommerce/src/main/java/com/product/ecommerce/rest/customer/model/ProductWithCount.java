@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * <Description>
+ * Product Id with the count associated with each order
  * 
  * @author Somendu
  * @since Mar 31, 2020

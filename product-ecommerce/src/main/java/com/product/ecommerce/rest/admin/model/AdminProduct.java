@@ -8,7 +8,7 @@ import java.util.List;
 import lombok.Data;
 
 /**
- * <Description>
+ * Product Order for the admin
  * 
  * @author Somendu
  * @since Apr 1, 2020

@@ -6,9 +6,7 @@ package com.product.ecommerce.rest.customer.dao.impl;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
@@ -30,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <Description>
+ * Implementation class for Order DAO
  * 
  * @author Somendu
  * @since Mar 31, 2020
@@ -43,10 +40,9 @@ public class OrderDaoImpl implements OrderDao {
 	@Autowired
 	private final JdbcTemplate jdbcTemplate;
 
-	private final String query = "select  first_name  from employees where rownum < 5";
-
 	private final String adminSelectquery = "SELECT i_prod_admin_id adminId, c_admin_name adminName FROM "
-			+ "(SELECT i_prod_admin_id, c_admin_name FROM prod_admin ORDER BY DBMS_RANDOM.value) WHERE ROWNUM = 1";
+			+ "(SELECT i_prod_admin_id, c_admin_name FROM prod_admin WHERE i_status > 0 ORDER BY DBMS_RANDOM.value) "
+			+ "WHERE ROWNUM = 1";
 
 	private final String orderInsertQuery = "INSERT INTO prod_order(i_cust_id, i_admin_id, i_status, c_input_user) "
 			+ "VALUES (?,?,1,?)";
@@ -56,32 +52,9 @@ public class OrderDaoImpl implements OrderDao {
 			+ "VALUES (?,?,?,'N',1,?)";
 
 	@Override
-	public void placeOrder(List<Integer> orderIds) {
-
-		List<String> nameList = new ArrayList<String>();
-
-		jdbcTemplate.query(query, new ResultSetExtractor<List<String>>() {
-
-			@Override
-			public List<String> extractData(ResultSet rs) throws SQLException {
-
-				while (rs.next()) {
-					String name = rs.getString("first_name");
-					nameList.add(name);
-				}
-				return nameList;
-			}
-
-		});
-
-		for (String name : nameList) {
-			System.out.println("Name here: " + name);
-		}
-	}
-
-	@Override
 	public AdminDetail getAdminDetail() {
 
+		// Keeping a static string string just in case
 		int adminId = 1;
 		String adminName = "ADM_RHL";
 
@@ -104,6 +77,7 @@ public class OrderDaoImpl implements OrderDao {
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
+		// Since we need to prod order id at the same time when the record is inserted
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(orderInsertQuery,
@@ -122,6 +96,7 @@ public class OrderDaoImpl implements OrderDao {
 		return orderId;
 	}
 
+	@Override
 	public int insertOrderItem(int orderId, String adminName, List<ProductWithCount> orderList) {
 
 		int[] insertCount = jdbcTemplate.batchUpdate(orderItemInsertQuery, new BatchPreparedStatementSetter() {
