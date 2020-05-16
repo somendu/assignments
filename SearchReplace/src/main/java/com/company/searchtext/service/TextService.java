@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -180,4 +181,42 @@ public class TextService {
 
 	}
 
+	public static void readLine(String sourceFile) throws IOException {
+
+		File file = new File(sourceFile);
+
+		List<String> fileLinesList = Files.readAllLines(file.toPath(), Charset.forName("UTF-8"));
+
+//		for (String line : fileLinesList) {
+//			replaceTextService.replaceText(line, searchString, replaceString);
+//		}
+
+		List<String> readReverseList = new ArrayList<String>();
+
+		for (long i = fileLinesList.size() - 1; i >= fileLinesList.size() - 10; i--) {
+
+			readReverseList.add(fileLinesList.get((int) i));
+		}
+
+		Collections.reverse(readReverseList);
+
+		for (String string : readReverseList) {
+			System.out.println(string);
+		}
+	}
+
+	public static void main(String[] args) {
+
+		String fileName = "/Users/somendu/Work-Area/Workspace/assignments/SearchReplace/fileplace/manifest2.txt";
+
+//		String extensionArray = FilenameUtils.getExtension(fileName);
+
+		try {
+			readLine(fileName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }

@@ -1,0 +1,8 @@
+/.metadata/
+Assignments/.gradle/
+*.classpath
+*.project
+Assessment/.settings/
+Assignments/.settings/
+product-ecommerce/.settings/
+product-ecommerce/jar/
