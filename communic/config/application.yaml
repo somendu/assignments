@@ -1,0 +1,6 @@
+communic.api:
+  server:  https://10.0.45.87
+  port: 1443
+  emailService: /EmailService/InsertEmailDetails
+  smsService: /SMSService/InsertSMSDetails
+

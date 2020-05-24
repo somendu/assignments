@@ -16,13 +16,12 @@ import lombok.Data;
  */
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "asses.api")
-public class AssessProperties {
+@ConfigurationProperties(prefix = "communic.api")
+public class CommunicProperties {
 
 	private String server;
 	private String port;
-	private String shipments;
-	private String track;
-	private String pricing;
+	private String emailService;
+	private String smsService;
 
 }

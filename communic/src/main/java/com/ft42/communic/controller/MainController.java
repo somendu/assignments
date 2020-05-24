@@ -1,15 +1,18 @@
 package com.ft42.communic.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ft42.communic.service.EmailService;
+import com.ft42.communic.service.SMSService;
+import com.google.gson.JsonObject;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -26,21 +29,44 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/")
 @RequiredArgsConstructor
 @Slf4j
-@EnableScheduling
 public class MainController {
 
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private SMSService smsService;
+
 	@PostMapping("/email")
-	@ApiOperation(value = "Email Api", notes = "The Email api result", response = String.class)
-	public ResponseEntity<?> insertEmail(@RequestParam(name = "pricing", required = false) String requestString) {
+	@ApiOperation(value = "Email Api", notes = "The Email api result", response = JsonObject.class)
+	public ResponseEntity<?> insertEmail(@RequestBody String insertEmailDetailsReq) {
 
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		JSONObject InsertEmailDetailsRes = new JSONObject();
 
-		String response = "Email Api Called";
+		try {
+			InsertEmailDetailsRes = emailService.insertEmailDetails(insertEmailDetailsReq);
+		} catch (ParseException e) {
 
-		resultMap.put(response, response);
+			e.printStackTrace();
+		}
 
-		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		return new ResponseEntity<JSONObject>(InsertEmailDetailsRes, HttpStatus.OK);
 
 	}
 
+	@PostMapping("/sms")
+	@ApiOperation(value = "SMS Api", notes = "The SMS api result", response = JsonObject.class)
+	public ResponseEntity<?> insertSMS(@RequestBody String insertSMSDetailsReq) {
+
+		JSONObject insertSMSDetailsRes = new JSONObject();
+
+		try {
+			insertSMSDetailsRes = smsService.insertSMSDetails(insertSMSDetailsReq);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<JSONObject>(insertSMSDetailsRes, HttpStatus.OK);
+	}
 }
