@@ -47,6 +47,8 @@ public class SMSServiceImpl implements SMSService {
 		String smsUrl = communicProperties.getServer() + ":" + communicProperties.getPort()
 				+ communicProperties.getSmsService();
 
+//		String smsUrl = "https://10.0.45.87:1443/SMSService/InsertSMSDetails";
+
 		smsDetailsResponseJson = restTemplate.postForObject(smsUrl, emailEntityRequest, JSONObject.class);
 
 		return smsDetailsResponseJson;

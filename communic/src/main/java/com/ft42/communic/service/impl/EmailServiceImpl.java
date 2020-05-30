@@ -52,10 +52,12 @@ public class EmailServiceImpl implements EmailService {
 
 		HttpEntity<JSONObject> emailEntityRequest = new HttpEntity<JSONObject>(emailDetailJsonObject, httpHeaders);
 
-		String emailUrl = communicProperties.getServer() + ":" + communicProperties.getPort()
+		String emaiURL = communicProperties.getServer() + ":" + communicProperties.getPort()
 				+ communicProperties.getEmailService();
 
-		emailDetailsResponseJson = restTemplate.postForObject(emailUrl, emailEntityRequest, JSONObject.class);
+//		String emaiURL = "https://10.0.45.87:1443/EmailService/InsertEmailDetails";
+
+		emailDetailsResponseJson = restTemplate.postForObject(emaiURL, emailEntityRequest, JSONObject.class);
 
 		return emailDetailsResponseJson;
 
