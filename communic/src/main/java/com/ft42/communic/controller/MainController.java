@@ -37,6 +37,12 @@ public class MainController {
 	@Autowired
 	private SMSService smsService;
 
+	/**
+	 * Method for Checking Email Service
+	 * 
+	 * @param insertEmailDetailsReq
+	 * @return
+	 */
 	@PostMapping("/email")
 	@ApiOperation(value = "Email Api", notes = "The Email api result", response = JsonObject.class)
 	public ResponseEntity<?> insertEmail(@RequestBody String insertEmailDetailsReq) {
