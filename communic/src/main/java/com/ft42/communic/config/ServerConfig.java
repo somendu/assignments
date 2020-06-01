@@ -42,6 +42,7 @@ public class ServerConfig {
 	 * 
 	 * @return
 	 */
+	@Bean
 	private Connector getHttpConnector() {
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
 		connector.setScheme("http");

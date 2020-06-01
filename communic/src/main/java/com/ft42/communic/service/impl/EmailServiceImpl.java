@@ -40,8 +40,6 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public JSONObject insertEmailDetails(String insertEmailDetailsReq) throws ParseException {
 
-		log.debug("String Here : " + insertEmailDetailsReq);
-
 		JSONParser jsonParser = new JSONParser();
 		JSONObject emailDetailJsonObject = (JSONObject) jsonParser.parse(insertEmailDetailsReq);
 
