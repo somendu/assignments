@@ -20,8 +20,8 @@ import lombok.Data;
 //scope = prototype can also be used
 public class TaskRequest {
 
-	private String date;
 	private String consName;
-	private String tasks;
+	private String taskDate;
+	private String taskList;
 
 }
