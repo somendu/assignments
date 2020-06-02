@@ -75,4 +75,14 @@ public class MainController {
 
 		return new ResponseEntity<JSONObject>(insertSMSDetailsRes, HttpStatus.OK);
 	}
+
+	@PostMapping("/testhere")
+	@ApiOperation(value = "Email Api", notes = "The Email api result", response = JsonObject.class)
+	public ResponseEntity<?> testData(@RequestBody String data) {
+
+		String returnData = "Test Return";
+
+		return new ResponseEntity<String>(returnData, HttpStatus.OK);
+
+	}
 }
