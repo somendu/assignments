@@ -37,6 +37,12 @@ public class MainController {
 	@Autowired
 	private SMSService smsService;
 
+	/**
+	 * Method for Checking Email Service
+	 * 
+	 * @param insertEmailDetailsReq
+	 * @return
+	 */
 	@PostMapping("/email")
 	@ApiOperation(value = "Email Api", notes = "The Email api result", response = JsonObject.class)
 	public ResponseEntity<?> insertEmail(@RequestBody String insertEmailDetailsReq) {
@@ -68,5 +74,15 @@ public class MainController {
 		}
 
 		return new ResponseEntity<JSONObject>(insertSMSDetailsRes, HttpStatus.OK);
+	}
+
+	@PostMapping("/testhere")
+	@ApiOperation(value = "Email Api", notes = "The Email api result", response = JsonObject.class)
+	public ResponseEntity<?> testData(@RequestBody String data) {
+
+		String returnData = "Test Return";
+
+		return new ResponseEntity<String>(returnData, HttpStatus.OK);
+
 	}
 }

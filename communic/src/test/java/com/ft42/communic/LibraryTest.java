@@ -3,11 +3,6 @@
  */
 package com.ft42.communic;
 
-import org.junit.Test;
-
 public class LibraryTest {
-	@Test
-	public void testSomeLibraryMethod() {
 
-	}
 }

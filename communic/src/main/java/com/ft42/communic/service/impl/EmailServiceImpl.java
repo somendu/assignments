@@ -40,8 +40,6 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public JSONObject insertEmailDetails(String insertEmailDetailsReq) throws ParseException {
 
-		log.debug("String Here : " + insertEmailDetailsReq);
-
 		JSONParser jsonParser = new JSONParser();
 		JSONObject emailDetailJsonObject = (JSONObject) jsonParser.parse(insertEmailDetailsReq);
 
@@ -52,10 +50,10 @@ public class EmailServiceImpl implements EmailService {
 
 		HttpEntity<JSONObject> emailEntityRequest = new HttpEntity<JSONObject>(emailDetailJsonObject, httpHeaders);
 
-		String emaiURL = communicProperties.getServer() + ":" + communicProperties.getPort()
-				+ communicProperties.getEmailService();
+//		String emaiURL = communicProperties.getServer() + ":" + communicProperties.getPort()
+//				+ communicProperties.getEmailService();
 
-//		String emaiURL = "https://10.0.45.87:1443/EmailService/InsertEmailDetails";
+		String emaiURL = "https://10.0.45.87:1443/EmailService/InsertEmailDetails";
 
 		emailDetailsResponseJson = restTemplate.postForObject(emaiURL, emailEntityRequest, JSONObject.class);
 
