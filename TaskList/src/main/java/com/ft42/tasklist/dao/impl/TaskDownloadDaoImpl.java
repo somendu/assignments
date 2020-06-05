@@ -3,6 +3,7 @@
  */
 package com.ft42.tasklist.dao.impl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TaskDownloadDaoImpl implements TaskDownloadDao {
 
 	private static String downloadListQuery = "SELECT t_task_input_date taskInputDate, c_task_list taskList, c_cons_name consName "
-			+ "FROM tasklist WHERE t_task_input_date BETWEEN ? AND ? AND c_cons_name = ? ORDER BY t_task_input_date";
+			+ "FROM tasklist WHERE t_task_input_date BETWEEN ? AND ? AND c_cons_name = ? ORDER BY t_task_input_date, i_task_id";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -35,7 +36,8 @@ public class TaskDownloadDaoImpl implements TaskDownloadDao {
 	public List<Map<String, Object>> getDownloadDataList(Map<String, Object> taskDownloadMap) {
 
 		List<Map<String, Object>> downloadMapList = jdbcTemplate.queryForList(downloadListQuery,
-				taskDownloadMap.get("dateFrom"), taskDownloadMap.get("dateTo"), taskDownloadMap.get("consName"));
+				(Date) taskDownloadMap.get("dateFrom"), (Date) taskDownloadMap.get("dateTo"),
+				taskDownloadMap.get("consName"));
 
 		return downloadMapList;
 	}

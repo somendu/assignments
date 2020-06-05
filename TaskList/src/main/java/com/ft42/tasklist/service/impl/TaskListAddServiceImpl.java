@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.ft42.tasklist.dao.TaskListAddDao;
 import com.ft42.tasklist.service.TaskListAddService;
 import com.ft42.tasklist.support.TaskRequest;
+import com.ft42.tasklist.support.TaskUtil;
 
 /**
  * @author admin
@@ -31,7 +32,7 @@ public class TaskListAddServiceImpl implements TaskListAddService {
 
 		// Convert String to Date
 		String taskDateString = taskRequest.getTaskDate();
-		Date taskDate = Date.valueOf(taskDateString);// converting string into sql date.
+		Date taskDate = TaskUtil.getDateToSQLDate(taskDateString);// converting string into sql date.
 
 		// Use the first name to input user
 		String firstName = taskRequest.getConsName();

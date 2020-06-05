@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.ft42.tasklist.dao.TaskDownloadDao;
 import com.ft42.tasklist.service.TaskDownloadService;
 import com.ft42.tasklist.support.TaskDownloadRequest;
+import com.ft42.tasklist.support.TaskUtil;
 
 /**
  * <Description>
@@ -44,11 +44,12 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 
 		// Convert String to Date
 		String taskDateFromString = taskDownloadRequest.getDateFrom();
-		Date taskFromDate = Date.valueOf(taskDateFromString);
+		System.out.println(taskDateFromString);
+		Date taskFromDate = TaskUtil.getDateToSQLDate(taskDateFromString);
 
 		// Convert String to Date
 		String taskDateToString = taskDownloadRequest.getDateTo();
-		Date taskToDate = Date.valueOf(taskDateToString);
+		Date taskToDate = TaskUtil.getDateToSQLDate(taskDateToString);
 
 		// TODO Take the range, name
 		taskDownloadMap.put("dateFrom", taskFromDate);
@@ -59,11 +60,9 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 		List<Map<String, Object>> downloadMapList = taskDownloadDao.getDownloadDataList(taskDownloadMap);
 
 		for (Map<String, Object> downloadMap : downloadMapList) {
-			Timestamp taskInputTimestamp = (Timestamp) downloadMap.get("taskInputDate");
-			DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-			String timestampAsString = formatter.format(taskInputTimestamp.toLocalDateTime());
-			downloadMap.put("taskInputDate", timestampAsString);
-
+			Timestamp sqlDate = (Timestamp) downloadMap.get("taskInputDate");
+			String sqlDateString = TaskUtil.getSQLDateToDate(sqlDate);
+			downloadMap.put("taskInputDate", sqlDateString);
 		}
 
 		// TODO Create Excel
@@ -83,11 +82,14 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 
 		int rowNum = 1;
 
+		String taskDate = "";
+
 		for (Map<String, Object> downloadMap : downloadMapList) {
 
 			XSSFRow nextRow = sheet.createRow(rowNum++);
 
-			nextRow.createCell(0).setCellValue((String) downloadMap.get("taskInputDate"));
+			taskDate = (String) downloadMap.get("taskInputDate");
+
 			nextRow.createCell(1).setCellValue((String) downloadMap.get("taskList"));
 			nextRow.createCell(2).setCellValue((String) downloadMap.get("consName"));
 		}

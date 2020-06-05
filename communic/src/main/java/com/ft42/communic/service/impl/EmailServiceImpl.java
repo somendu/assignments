@@ -46,6 +46,7 @@ public class EmailServiceImpl implements EmailService {
 		JSONObject emailDetailsResponseJson = new JSONObject();
 
 		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setBasicAuth("testclient", "OxYcool@123");
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
 		HttpEntity<JSONObject> emailEntityRequest = new HttpEntity<JSONObject>(emailDetailJsonObject, httpHeaders);

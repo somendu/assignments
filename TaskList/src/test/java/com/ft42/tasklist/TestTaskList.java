@@ -2,10 +2,12 @@ package com.ft42.tasklist;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.Test;
+
+import com.ft42.tasklist.support.TaskUtil;
 
 public class TestTaskList {
 
@@ -20,12 +22,21 @@ public class TestTaskList {
 	}
 
 	@Test
-	public void testDateTimeStamp() {
+	public void testSQLDate() {
 
-		Timestamp timestamp = Timestamp.valueOf("2018-12-12 01:02:03.123456789");
-		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+		Date date = Date.valueOf("2018-12-12");
+		assertEquals(date, TaskUtil.getDateToSQLDate("12-12-2018"));
 
-		String timestampAsString = formatter.format(timestamp.toLocalDateTime());
-		assertEquals("2018-12-12", timestampAsString);
+	}
+
+	@Test
+	public void testDateString() {
+
+		Date date = Date.valueOf("2018-12-12");
+
+		Timestamp sqlDateTimestamp = new Timestamp(date.getTime());
+
+		assertEquals("12-12-2018", TaskUtil.getSQLDateToDate(sqlDateTimestamp));
+
 	}
 }

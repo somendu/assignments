@@ -1,22 +1,20 @@
 <template>
   <div id="app">
 
-    <TaskListSave/>
+    <MainPage/>
     
   </div>
 </template>
 
 <script>
 
-//import Hover from './components/Hover.vue';
-import TaskListSave from './components/TaskListSave.vue';
-// import ImageView from './components/ImageView.vue';
+import MainPage from './components/MainPage.vue';
 
 export default {
   name: 'App',
 
   components: {
-    TaskListSave
+    MainPage
   }
 };
 </script>
