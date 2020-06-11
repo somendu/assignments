@@ -126,28 +126,29 @@ export default {
     
     fetchResponseHandler (res) {
 
-     console.log(res.body);
-     console.log(res.headers.get('Content-Type'));
-     console.log(res.headers.get('Content-Disposition'));
-     console.log(res.headers.get('Content-Length'));
-     console.log(res.headers.get('Accept'));
+   res.body
+     .getReader()
+     .read()
+     .then(({value, done}) => {
+         
+            const blob = new Blob([value], { type: res.headers.get('Content-Type') })
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    let contentDisposition = res.headers.get('Content-Disposition');
 
-  
-    
- 
-     const decoder = new TextDecoder('utf-8')
+    let fileNameMatch = '';
+
+    if (contentDisposition) {
+      fileNameMatch = contentDisposition.substring(21, contentDisposition.length);
+    }
+
+    link.setAttribute('download', fileNameMatch);
+    link.click()
+     })
 
     
     
-    res.body
-      .getReader()
-      .read()
-      .then(({value, done}) => {
-        
-           console.log(decoder.decode(value))
-                console.log(done)
-      })
- 
 
     },
     
