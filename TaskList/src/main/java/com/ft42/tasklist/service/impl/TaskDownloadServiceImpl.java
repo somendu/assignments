@@ -103,7 +103,6 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 		workBook.close();
 
 		// TODO Return Excel
-
 		ByteArrayResource byteArrayResource = new ByteArrayResource(outputStream.toByteArray());
 
 		return byteArrayResource;
