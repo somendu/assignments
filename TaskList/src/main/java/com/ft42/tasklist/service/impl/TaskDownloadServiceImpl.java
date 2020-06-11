@@ -16,6 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 
 import com.ft42.tasklist.dao.TaskDownloadDao;
@@ -37,14 +38,14 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 	private TaskDownloadDao taskDownloadDao;
 
 	@Override
-	public ByteArrayOutputStream downloadExcel(TaskDownloadRequest taskDownloadRequest)
+	public ByteArrayResource downloadExcel(TaskDownloadRequest taskDownloadRequest)
 			throws IOException, FileNotFoundException {
 
 		Map<String, Object> taskDownloadMap = new HashMap<String, Object>();
 
 		// Convert String to Date
 		String taskDateFromString = taskDownloadRequest.getDateFrom();
-		System.out.println(taskDateFromString);
+
 		Date taskFromDate = TaskUtil.getDateToSQLDate(taskDateFromString);
 
 		// Convert String to Date
@@ -88,8 +89,7 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 
 			XSSFRow nextRow = sheet.createRow(rowNum++);
 
-			taskDate = (String) downloadMap.get("taskInputDate");
-
+			nextRow.createCell(0).setCellValue((String) downloadMap.get("taskInputDate"));
 			nextRow.createCell(1).setCellValue((String) downloadMap.get("taskList"));
 			nextRow.createCell(2).setCellValue((String) downloadMap.get("consName"));
 		}
@@ -104,7 +104,9 @@ public class TaskDownloadServiceImpl implements TaskDownloadService {
 
 		// TODO Return Excel
 
-		return outputStream;
+		ByteArrayResource byteArrayResource = new ByteArrayResource(outputStream.toByteArray());
+
+		return byteArrayResource;
 	}
 
 }

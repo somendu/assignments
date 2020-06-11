@@ -26,7 +26,7 @@ public class TaskListAddServiceImpl implements TaskListAddService {
 	private TaskListAddDao taskListAddDao;
 
 	@Override
-	public String insertTaskList(TaskRequest taskRequest) {
+	public Map<String, Object> insertTaskList(TaskRequest taskRequest) {
 
 		Map<String, Object> taskListMap = new HashMap<String, Object>();
 
@@ -47,10 +47,15 @@ public class TaskListAddServiceImpl implements TaskListAddService {
 		taskListMap.put("firstName", firstName);
 
 		int insertReturn = taskListAddDao.insertTaskList(taskListMap);
+		System.out.println("Insert Retunr : " + insertReturn);
 
 		String resultReturn = "Data Inserted for : " + (String) taskListMap.get("consName");
 
-		return resultReturn;
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+
+		returnMap.put("insertSuccess", resultReturn);
+
+		return returnMap;
 	}
 
 }

@@ -3,9 +3,10 @@
  */
 package com.ft42.tasklist.service;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import org.springframework.core.io.ByteArrayResource;
 
 import com.ft42.tasklist.support.TaskDownloadRequest;
 
@@ -23,7 +24,7 @@ public interface TaskDownloadService {
 	 * @param taskDownloadRequest
 	 * @return
 	 */
-	public ByteArrayOutputStream downloadExcel(TaskDownloadRequest taskDownloadRequest)
+	public ByteArrayResource downloadExcel(TaskDownloadRequest taskDownloadRequest)
 			throws IOException, FileNotFoundException;
 
 }

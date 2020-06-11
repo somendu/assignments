@@ -1,5 +1,5 @@
 module.exports = {
-  outputDir: '../Lineage-Upload/src/main/resources/static',
+  outputDir: '../TaskList/src/main/resources/static',
   transpileDependencies: ['vue-octicon'],
   configureWebpack: {
     devtool: 'source-map'
@@ -8,7 +8,7 @@ module.exports = {
     port: 8090,
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:9000',
         changeOrigin: true
       }
     }

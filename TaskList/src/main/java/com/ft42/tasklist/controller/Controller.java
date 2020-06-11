@@ -1,8 +1,8 @@
 package com.ft42.tasklist.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -42,7 +42,7 @@ public class Controller {
 
 	// Insert Task List
 	@PostMapping("/insertTaskList")
-	public String insertTaskList(@RequestBody TaskRequest taskRequest) {
+	public Map<String, Object> insertTaskList(@RequestBody TaskRequest taskRequest) {
 
 		return taskListAddService.insertTaskList(taskRequest);
 	}
@@ -59,15 +59,14 @@ public class Controller {
 					taskDownloadRequest.getConsName().lastIndexOf(" "));
 		}
 
-		ByteArrayOutputStream outputStream = taskDownloadService.downloadExcel(taskDownloadRequest);
+		ByteArrayResource byteArrayResource = taskDownloadService.downloadExcel(taskDownloadRequest);
 
 		HttpHeaders header = new HttpHeaders();
-		header.setContentType(new MediaType("application", "force-download"));
+		header.setContentType(new MediaType("application", "xlsx"));
 		header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName + ".xlsx");
+		header.set(HttpHeaders.ACCEPT, "application/vnd.ms-excel");
 
-		outputStream.flush();
-
-		return new ResponseEntity<>(new ByteArrayResource(outputStream.toByteArray()), header, HttpStatus.CREATED);
+		return new ResponseEntity<>(byteArrayResource, header, HttpStatus.CREATED);
 
 	}
 

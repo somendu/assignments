@@ -33,9 +33,7 @@ public class TestTaskList {
 	public void testDateString() {
 
 		Date date = Date.valueOf("2018-09-12");
-
 		Timestamp sqlDateTimestamp = new Timestamp(date.getTime());
-
 		assertEquals("12-09-2018", TaskUtil.getSQLDateToDate(sqlDateTimestamp));
 
 	}

@@ -3,6 +3,8 @@
  */
 package com.ft42.tasklist.service;
 
+import java.util.Map;
+
 import com.ft42.tasklist.support.TaskRequest;
 
 /**
@@ -14,5 +16,11 @@ import com.ft42.tasklist.support.TaskRequest;
  */
 public interface TaskListAddService {
 
-	public String insertTaskList(TaskRequest taskRequest);
+	/**
+	 * Insert Task
+	 * 
+	 * @param taskRequest
+	 * @return
+	 */
+	public Map<String, Object> insertTaskList(TaskRequest taskRequest);
 }

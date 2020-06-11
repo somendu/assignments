@@ -1,15 +1,158 @@
 <template>
    <div id = 'task-list-download' class="mt-2">
-      <p> Download Page </p>
+      <table class="mt-2" border="1" width="100%"> 
+      <tr>
+        <td>
+          <p> Name </p>
+          <input id="name-input" type="text" size="40" v-model="value.consName"/>
+        </td>
+
+       <td><p> Date From </p>
+            <datepicker placeholder="Select Date" size="40" v-model="value.dateFrom" format="dd-MM-yyyy" name="dateFrom"></datepicker>
+       </td>
+
+       <td><p> Date From </p>
+            <datepicker placeholder="Select Date" size="40" v-model="value.dateTo" format="dd-MM-yyyy" name="dateTo"></datepicker>
+       </td>          
+      </tr>
+    </table>
+    <br><br>
+    <div id="task-download">
+ 
+           <input id="download-button" type="Button" value="Download"  v-on:click="downloadExcel()"/>
+           &nbsp;&nbsp;&nbsp;
+           <input id="cancel-button" type="Button" value="Cancel"/>
+        
+     </div>
     </div>
 </template>
 
 <script>
 
- 
+import Datepicker from "vuejs-datepicker/dist/vuejs-datepicker.esm.js";
+import ExcelJs from "exceljs";
+import Stream from "exceljs"
+
+function pad2 (num) {
+  if (num < 10) return '0' + num;
+  return num;
+}
+
+function formatDate (value) {
+  return pad2(value.getDate() + '-' + pad2(value.getMonth() + 1) + '-' + value.getFullYear());
+}
+
+function parseDate (value) {
+  if (typeof value === 'string' && value.length === 10) {
+    const day = parseInt(value.substring(0, 1), 10);
+    const month = parseInt(value.substring(3, 5), 10);
+    const year = parseInt(value.substring(7), 10);
+
+    if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+      return new Date(year, month - 1, day);
+    }
+  }
+
+  return null;
+} 
 
 export default {
   name: 'TaskListDownload',
+
+
+  components: {
+    Datepicker
+  }, 
+
+  data(){
+  return {
+   
+   value: {
+    consName: '',
+    dateFrom: new Date(),
+    dateTo: new Date() + 30
+    }, 
+
+    error: '',
+    wb2: new ExcelJs.Workbook()
+
+  }
+	},
+
+  methods: {
+
+    set (value) {
+       value.dateFrom = parseDate(value.dateFrom);
+       value.dateTo = parseDate(value.dateTo);    
+         this.$set(this, 'value', value);
+    },
+
+    downloadExcel(){
+    
+    const result = {};
+
+      for (let key of Object.keys(this.value)) {
+        if (this.value[key] != null && this.value[key] !== '') {
+          result[key] = this.value[key];
+        }
+      }
+
+    this.value.dateFrom = formatDate(result.dateFrom);
+    this.value.dateTo = formatDate(result.dateTo);
+
+    
+    fetch('/api/downloadTaskList', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          consName: this.value.consName,
+          dateFrom: this.value.dateFrom,
+          dateTo: this.value.dateTo
+        })
+      })
+      .then(this.fetchResponseHandler)
+      .catch(err => {
+      this.error = err;
+      console.error('There was an error!', err);
+    });
+    
+    this.value.consName = '';
+    this.value.dateFrom = new Date();
+    this.value.dateTo = new Date();
+ 
+  }, 
+    
+    fetchResponseHandler (res) {
+
+     console.log(res.body);
+     console.log(res.headers.get('Content-Type'));
+     console.log(res.headers.get('Content-Disposition'));
+     console.log(res.headers.get('Content-Length'));
+     console.log(res.headers.get('Accept'));
+
+  
+    
+ 
+     const decoder = new TextDecoder('utf-8')
+
+    
+    
+    res.body
+      .getReader()
+      .read()
+      .then(({value, done}) => {
+        
+           console.log(decoder.decode(value))
+                console.log(done)
+      })
+ 
+
+    },
+    
+  }
+
 };
 </script>
 
