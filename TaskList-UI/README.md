@@ -1,14 +1,22 @@
-# codemix-vanilla-react
+# Task List 
 
-Template for project creation of Vue inside CodeMix
+Task List Project
 
 # Contents
 
-This template project is just an example Hello World that guide you through the use of Vue to build a very simple web application that display the Hello World!!! Greeting.
+The project is simple combination of a front end in vue.js and back end as spring boot application to save tasks date wise and download the excel sheet
 
-This example has been started with the vue-cli and webpack-simple
 
 # Project setup
+
+Download and Install node.js from https://nodejs.org/en/download/
+
+Check from command line 'npm' 
+
+## Front End 
+Change directory /TaskList-UI
+
+Run below
 ```
 npm install
 ```
@@ -32,3 +40,69 @@ npm run test
 ```
 npm run lint
 ```
+
+## Back End
+
+Download and Install gradle from https://nodejs.org/en/download/
+
+Check from command line 'gradle' 
+
+optional - If want to run in local machine, download and install oracle 
+https://www.oracle.com/database/technologies/oracle19c-windows-downloads.html
+
+Unlocking HR Schema
+http://www.rebellionrider.com/how-to-unlock-hr-user-in-oracle-database-19c/
+
+
+```
+gradle
+```
+
+### Compiles and hot-reloads for development
+```
+gradle build --console=plain copyJar
+```
+
+###  Once build
+```
+java -jar Jar/TaskList.jar
+```
+
+###  Execute on a browser
+```
+http://localhost:9000
+```
+
+## Windows Service
+
+To run the application as a Windows Service
+
+https://dzone.com/articles/spring-boot-as-a-windows-service-in-5-minutes
+
+### Executable
+```
+winsw.exe
+```
+
+###  Configuration XML
+```
+winsw.xml
+```
+
+###  Rename the files 
+
+Rename the files to your service name and XML 
+
+### Commands to install/uninstall - run on command line 
+
+```
+xx.exe install
+```
+
+```
+xx.exe uninstall
+```
+
+Go to 'Services' Look for the service name and start the service
+
+Go to browser and hit the URL
