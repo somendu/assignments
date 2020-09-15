@@ -16,6 +16,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		System.setProperty("oracle.net.tns_admin",
+				"C:\\FortyTwo42\\Work-Area\\Soft\\WINDOWS.X64_193000_db_home\\network\\admin");
+
 		String serverName = "";
 
 		switch (args.length) {
