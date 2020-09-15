@@ -25,21 +25,25 @@ public class LocationFinder {
 		JSONObject jsonObject = null;
 		String mapLink = "";
 
-		location = getLocation("2601:246:5100:3440:1cab:f37b:418f:2d34");
+		location = getLocation("2409:4043:68f:9430::56a:b8b1");
 		jsonObject = new JSONObject(location);
 
-		mapLink = "https://www.google.com/maps/?q=" + jsonObject.getString("loc");
+		mapLink = "https://www.google.com/maps/?q="
+				+ jsonObject.getString("loc");
 
 		System.out.println("Your City : " + jsonObject.getString("city"));
 		System.out.println("Your Country : " + jsonObject.getString("country"));
 		System.out.println("Your Location : " + mapLink);
-		System.out.println("Your Time Zone : " + jsonObject.getString("timezone"));
+		System.out.println(
+				"Your Time Zone : " + jsonObject.getString("timezone"));
 		System.out.println("Your Region : " + jsonObject.getString("region"));
 
 	}
 
-//	 Data {country=NL, loc=51.9225,4.4792, hostname=ip-213-127-67-119.ip.prioritytelecom.net, 
-	// city=Rotterdam, org=AS6830 Liberty Global B.V., timezone=Europe/Amsterdam,
+	// Data {country=NL, loc=51.9225,4.4792,
+	// hostname=ip-213-127-67-119.ip.prioritytelecom.net,
+	// city=Rotterdam, org=AS6830 Liberty Global B.V.,
+	// timezone=Europe/Amsterdam,
 	// ip=213.127.67.119,
 	// postal=3012, readme=https://ipinfo.io/missingauth, region=South Holland}
 
@@ -59,7 +63,8 @@ public class LocationFinder {
 
 			URLConnection urlConnection = url.openConnection();
 
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+			BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(urlConnection.getInputStream()));
 
 			String inputLine;
 
