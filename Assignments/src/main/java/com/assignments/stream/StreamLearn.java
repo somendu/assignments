@@ -5,6 +5,7 @@ package com.assignments.stream;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -19,8 +20,10 @@ public class StreamLearn {
 	 */
 	public static void main(String[] args) {
 
-		List<String> stringList = Arrays.asList("som", "maiti", "somu", "abc",
+		List<String> stringList = Arrays.asList("som", "maitim", "somum", "abc",
 				"rahul", "style");
+		List<String> stringTwoList = Arrays.asList("som", "maiti", "somu",
+				"abc", "rahul", "style");
 
 		// List<String> stringList = Arrays.asList("som", "maiti", "somu",
 		// "abc",
@@ -28,6 +31,14 @@ public class StreamLearn {
 
 		// stringList.stream().filter(str -> str.startsWith("s"))
 		// .map(String::toUpperCase).sorted().forEach(System.out::println);
+
+		List<String> m_endingList = stringList.stream()
+				.filter(str -> str.endsWith("m")).collect(Collectors.toList());
+
+		// System.out.println(m_endingList);
+
+		// stringList.stream().filter(str -> str.endsWith("m"))
+		// .map(String::toUpperCase).forEach(System.out::println);
 
 		// Stream.of("som", "maiti", "somu", "abc", "rahul",
 		// "style").findFirst().ifPresent(System.out::println);
@@ -51,14 +62,17 @@ public class StreamLearn {
 		// System.out.println(count);
 
 		Stream.of("a1", "a2", "a3", "a4", "a5", "a6").map(s -> s.substring(1))
-				.mapToInt(Integer::parseInt).max()
-				.ifPresent(System.out::println);
+				.mapToInt(Integer::parseInt).forEach(System.out::println);
 
 		// IntStream.range(1, 4).mapToObj(i -> "a" +
 		// i).forEach(System.out::println);
 
 		// Stream.of(1.0, 2.0, 3.0).mapToInt(Double::intValue)
 		// .mapToObj(i -> "a" + i).forEach(System.out::println);
+
+		long count = Stream.of(stringList, stringTwoList).count();
+
+		System.out.println(count);
 
 	}
 
