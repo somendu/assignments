@@ -2,8 +2,15 @@ package com.assignments.stream.udemy.data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class StudentDataBase {
+
+	public static Supplier<Student> studentSupplier = () -> {
+		Student student1 = new Student("Adam", 2, 3.6, "male", 10,
+				Arrays.asList("swimming", "basketball", "volleyball"));
+		return student1;
+	};
 
 	/**
 	 * Total of 6 students in the database.
