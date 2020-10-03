@@ -2,14 +2,30 @@ package com.assignments.stream.udemy.data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class StudentDataBase {
 
-	public static Supplier<Student> studentSupplier = () -> {
+	public static Supplier<Student> studentAdamSupplier = () -> {
+
+		Bike bike = new Bike();
+
+		bike.setModel("XYZ");
+		bike.setName("ABC");
+
 		Student student1 = new Student("Adam", 2, 3.6, "male", 10,
 				Arrays.asList("swimming", "basketball", "volleyball"));
+
+		student1.setBike(Optional.ofNullable(bike));
+
 		return student1;
+	};
+
+	public static Supplier<Student> studentDaveSupplier = () -> {
+		Student student4 = new Student("Dave", 3, 4.0, "male", 15,
+				Arrays.asList("swimming", "gymnastics", "soccer"));
+		return student4;
 	};
 
 	/**

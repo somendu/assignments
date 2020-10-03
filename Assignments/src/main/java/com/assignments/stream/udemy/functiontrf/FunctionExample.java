@@ -10,7 +10,7 @@ import java.util.function.Function;
  *
  * @since 24-Sep-2020
  */
-public class FunctionaExample {
+public class FunctionExample {
 
 	static Function<String, String> function = (name) -> name.toLowerCase();
 

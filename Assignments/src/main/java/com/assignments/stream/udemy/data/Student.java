@@ -2,6 +2,7 @@ package com.assignments.stream.udemy.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.Data;
 
@@ -13,6 +14,8 @@ public class Student {
 	private String gender;
 	private int noteBooks;
 	private List<String> activities = new ArrayList<>();
+
+	private Optional<Bike> bike = Optional.empty();
 
 	public Student() {
 
@@ -48,9 +51,9 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student{" + "name='" + name + '\'' + ", gradeLevel="
-				+ gradeLevel + ", gpa=" + gpa + ", gender='" + gender + '\''
-				+ ", activities=" + activities + '}';
+		return "Student [name=" + name + ", gradeLevel=" + gradeLevel + ", gpa="
+				+ gpa + ", gender=" + gender + ", noteBooks=" + noteBooks
+				+ ", activities=" + activities + ", bike=" + bike + "]";
 	}
 
 }

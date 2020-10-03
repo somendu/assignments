@@ -26,11 +26,11 @@ public class RefactorMethodRefEx {
 
 	public static void main(String[] args) {
 
-		System.out.println(
-				studentPredicate.test(StudentDataBase.studentSupplier.get()));
+		System.out.println(studentPredicate
+				.test(StudentDataBase.studentAdamSupplier.get()));
 
 		System.out.println(studentPredicateRefMeth
-				.test(StudentDataBase.studentSupplier.get()));
+				.test(StudentDataBase.studentAdamSupplier.get()));
 
 	}
 
