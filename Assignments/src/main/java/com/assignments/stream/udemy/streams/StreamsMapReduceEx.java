@@ -17,7 +17,7 @@ public class StreamsMapReduceEx {
 
 		int noOfNotebooks = StudentDataBase.getAllStudents().stream()
 
-				.filter(student -> student.getGradeLevel() >= 3)
+				// .filter(student -> student.getGradeLevel() >= 3)
 
 				.filter(student -> student.getGender()
 						.equalsIgnoreCase("female"))

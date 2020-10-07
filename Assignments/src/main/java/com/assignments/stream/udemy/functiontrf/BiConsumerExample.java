@@ -6,7 +6,6 @@ package com.assignments.stream.udemy.functiontrf;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import com.assignments.stream.udemy.data.Student;
 import com.assignments.stream.udemy.data.StudentDataBase;
 
 /**
@@ -18,7 +17,7 @@ public class BiConsumerExample {
 
 	public static void printStudentNameAndActivities() {
 
-		List<Student> studentList = StudentDataBase.getAllStudents();
+		var studentList = StudentDataBase.getAllStudents();
 
 		BiConsumer<String, List<String>> studentConsumer = (name,
 				activities) -> System.out
