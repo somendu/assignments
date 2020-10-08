@@ -4,6 +4,7 @@
 package com.assignments.stream;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
@@ -43,12 +44,34 @@ public class EmployeeStream {
 
 		// System.out.println(filtered);
 
+		// Sorting by Salary
+		Comparator<Employee> salaryComparator = (e1, e2) -> Double
+				.compare(e1.getSalary(), (e2.getSalary()));
+
+		List<Employee> sortedEmployees = employeeList.stream()
+				.sorted(salaryComparator).collect(Collectors.toList());
+
+		// sortedEmployees.forEach((p) -> System.out.println(
+		// "Name : " + p.getFirstName() + " Salary " + p.getSalary()));
+
+		// Sorting by Age
+		Comparator<Employee> ageComparator = (e1, e2) -> Integer
+				.compare(e1.getAge(), e2.getAge());
+
+		List<Employee> sortedAgeEmployees = employeeList.stream()
+				.sorted(ageComparator).collect(Collectors.toList());
+
+		sortedAgeEmployees.forEach((p) -> System.out
+				.println("Name : " + p.getFirstName() + " Age " + p.getAge()));
+
+		// Person by Age
 		Map<Integer, List<Employee>> personsByAge = employeeList.stream()
 				.collect(Collectors.groupingBy(p -> p.getAge()));
 
 		// personsByAge
 		// .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));
 
+		// Average Age
 		Double averageAge = employeeList.stream()
 				.collect(Collectors.averagingInt(p -> p.getAge()));
 
@@ -62,10 +85,10 @@ public class EmployeeStream {
 				.collect(Collectors.summarizingInt(p -> p.getAge()));
 
 		// System.out.println(ageSummary);
-
-		String phrase = employeeList.stream().filter(p -> p.getAge() >= 33)
-				.map(p -> p.getFirstName()).collect(Collectors.joining(" and ",
-						"In Germany ", " are of legal age."));
+		//
+		// String phrase = employeeList.stream().filter(p -> p.getAge() >= 33)
+		// .map(p -> p.getFirstName()).collect(Collectors.joining(" and ",
+		// "In Germany ", " are of legal age."));
 
 		// System.out.println(phrase);
 
@@ -84,7 +107,7 @@ public class EmployeeStream {
 		String namesAges = employeeList.stream()
 				.collect(employeeNameAgeCollector);
 
-		System.out.println(namesAges);
+		// System.out.println(namesAges);
 
 	}
 
