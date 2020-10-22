@@ -3,6 +3,7 @@ package com.chegg.employee.controller;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,7 +68,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/salaryTotalByGender/{gender}", method = RequestMethod.GET)
-	public double salaryCalculateByGender(@PathVariable String gender) {
+	public double salaryTotalByGender(@PathVariable String gender) {
 
 		// Double comparison
 
@@ -79,6 +80,21 @@ public class MainController {
 				.reduce(0.0, Double::sum);
 
 		return salaryTotal;
+	}
+
+	@RequestMapping(value = "/sortByDept", method = RequestMethod.GET)
+	public Map<String, List<Employee>> sortByDept() {
+
+		// Grouping By
+
+		Map<String, List<Employee>> departmentList = EmployeeDataBase
+				.getAllEmployees().stream()
+
+				.sorted(Comparator.comparing(Employee::getDepartment))
+
+				.collect(Collectors.groupingBy(Employee::getDepartment));
+
+		return departmentList;
 	}
 
 }

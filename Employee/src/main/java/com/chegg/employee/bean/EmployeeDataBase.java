@@ -34,8 +34,15 @@ public class EmployeeDataBase {
 		Employee Employee5 = new Employee("Joey", 6000, "BA", "male");
 		Employee Employee6 = new Employee("Monica", 7000, "PM", "female");
 
+		Employee Employee7 = new Employee("Rafel", 3000, "QA", "male");
+		Employee Employee8 = new Employee("Alex", 3000, "Dev", "female");
+
+		Employee Employee9 = new Employee("Michael", 3000, "QA", "male");
+		Employee Employee10 = new Employee("Nikita", 3000, "Dev", "female");
+
 		List<Employee> Employees = Arrays.asList(Employee1, Employee2,
-				Employee3, Employee4, Employee5, Employee6);
+				Employee3, Employee4, Employee5, Employee6, Employee7,
+				Employee8, Employee9, Employee10);
 		return Employees;
 	}
 }
