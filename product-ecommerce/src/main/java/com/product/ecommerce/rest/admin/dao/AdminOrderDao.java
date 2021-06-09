@@ -22,7 +22,7 @@ public interface AdminOrderDao {
 	 * @param adminId
 	 * @return
 	 */
-	public List<Map<String, Object>> getAdminOrderList(String adminId);
+	public List<Map<String, Object>> getAdminOrderList();
 
 	/**
 	 * Getting singled out orders based on order id

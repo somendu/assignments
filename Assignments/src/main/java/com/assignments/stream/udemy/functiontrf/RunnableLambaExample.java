@@ -25,11 +25,12 @@ public class RunnableLambaExample {
 			}
 		};
 
-		new Thread(runnable).start();
+		Thread thread = new Thread(runnable);
+		thread.start();
 
 		Runnable runnable1 = () -> System.out.println("Running second time");
-
-		new Thread(runnable1).start();
+		Thread thread1 = new Thread(runnable1);
+		thread1.start();
 
 		new Thread(() -> System.out.println("Running Third time")).start();
 	}

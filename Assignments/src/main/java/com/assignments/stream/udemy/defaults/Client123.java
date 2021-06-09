@@ -14,6 +14,10 @@ public class Client123 implements Interface1, Interface2, Interface3 {
 		System.out.println("Inside Method A " + Client123.class);
 	}
 
+	public void methodD() {
+		System.out.println("Inside Method D " + Client123.class);
+	}
+
 	/**
 	 * @param args
 	 */
@@ -24,7 +28,7 @@ public class Client123 implements Interface1, Interface2, Interface3 {
 		client123.methodA();
 		client123.methodB();
 		client123.methodC();
-
+		client123.methodD();
 	}
 
 }

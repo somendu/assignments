@@ -30,8 +30,7 @@ public class AdminOrderDaoImpl implements AdminOrderDao {
 	@Autowired
 	private final JdbcTemplate jdbcTemplate;
 
-	private final String adminOrderQuery = "SELECT i_prod_order_id prodOrderId FROM prod_order WHERE i_admin_id = ? "
-			+ "AND i_status > 0";
+	private final String adminOrderQuery = "SELECT i_prod_order_id prodOrderId FROM prod_order WHERE i_status > 0";
 
 	private final String adminOrderItemQuery = "SELECT i_product_id productId, i_prod_count prodCount "
 			+ "FROM order_items WHERE i_prod_order_id = ? AND c_approve_status = 'N' AND i_status > 0";
@@ -43,10 +42,10 @@ public class AdminOrderDaoImpl implements AdminOrderDao {
 			+ "WHERE i_prod_order_id = ? AND i_product_id = ?";
 
 	@Override
-	public List<Map<String, Object>> getAdminOrderList(String adminId) {
+	public List<Map<String, Object>> getAdminOrderList() {
 
 		// Query prod_order table - get order id
-		List<Map<String, Object>> adminOrderList = jdbcTemplate.queryForList(adminOrderQuery, adminId);
+		List<Map<String, Object>> adminOrderList = jdbcTemplate.queryForList(adminOrderQuery);
 
 		return adminOrderList;
 	}

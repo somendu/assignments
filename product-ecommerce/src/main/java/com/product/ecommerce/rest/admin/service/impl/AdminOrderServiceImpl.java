@@ -40,7 +40,11 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		AdminOrders adminOrders = new AdminOrders();
 
 		// Getting all the orders for the particular admin
-		List<Map<String, Object>> adminOrderList = adminOrderDao.getAdminOrderList(adminId);
+		List<Map<String, Object>> adminOrderList = adminOrderDao.getAdminOrderList();
+
+//		Predicate<List<Map<String, Object>>> psgn = (adminIdMap) -> adminIdMap.);
+
+//		adminOrderList.stream().filter(adminIdMap -> adminIdMap.get(adminId));
 
 		List<Integer> orderIntList = new ArrayList<Integer>();
 

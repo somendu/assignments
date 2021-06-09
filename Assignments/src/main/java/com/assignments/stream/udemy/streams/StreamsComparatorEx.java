@@ -19,22 +19,20 @@ public class StreamsComparatorEx {
 
 	public static List<Student> sortStudentsByName() {
 
-		return StudentDataBase.getAllStudents().stream()
-				.sorted(Comparator.comparing(Student::getName))
+		return StudentDataBase.getAllStudents().stream().sorted(Comparator.comparing(Student::getName))
 				.collect(Collectors.toList());
 	}
 
 	public static List<Student> sortStudentsByGpa() {
 
-		return StudentDataBase.getAllStudents().stream()
-				.sorted(Comparator.comparing(Student::getGpa))
+		return StudentDataBase.getAllStudents().stream().sorted(Comparator.comparing(Student::getGpa))
 				.collect(Collectors.toList());
+
 	}
 
 	public static List<Student> sortStudentsByGpaDesc() {
 
-		return StudentDataBase.getAllStudents().stream()
-				.sorted(Comparator.comparing(Student::getGpa).reversed())
+		return StudentDataBase.getAllStudents().stream().sorted(Comparator.comparing(Student::getGpa).reversed())
 				.collect(Collectors.toList());
 	}
 
