@@ -4,3 +4,5 @@ TaskList/.gradle/
 TaskList/.settings/
 TaskList/bin/
 TaskList-UI/.settings/
+SeleniumStart/.settings/
+*.gitignore
