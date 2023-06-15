@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.practice.javastdinandstdout1;
+package com.practice.integer;
 
 import java.util.HashMap;
 
@@ -38,10 +38,17 @@ public class SumIntegerHashMap {
 
 		SumIntegerHashMap sumInteger = new SumIntegerHashMap();
 		int a = 4;
-		int b = 5;
-		int sum = sumInteger.sum(a, b);
+		int b = 54;
+		int sum = 0;
 
-		System.out.println("Sum of " + stringMap.get(a) + " and " + stringMap.get(b) + " is " + stringMap.get(sum));
+		try {
+			if (a > 9 || a < 1 || b > 9 || b < 1)
+				throw new IntegerAboveNineException("Please Enter Digits between 1 and 9 Only");
+			sum = sumInteger.sum(a, b);
+			System.out.println("Sum of " + stringMap.get(a) + " and " + stringMap.get(b) + " is " + stringMap.get(sum));
+		} catch (IntegerAboveNineException e) {
+			e.printStackTrace();
+		}
 
 	}
 
