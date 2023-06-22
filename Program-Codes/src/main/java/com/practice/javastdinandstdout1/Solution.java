@@ -21,6 +21,8 @@ public class Solution {
 		System.out.println(c);
 		// Complete this line
 		// Complete this line
+
+		scan.close();
 	}
 
 }
