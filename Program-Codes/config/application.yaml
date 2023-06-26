@@ -1,0 +1,7 @@
+asses.api:
+  server:  http://localhost
+  port: 8081
+  shipments: /shipments
+  track: /track
+  pricing: /pricing
+
