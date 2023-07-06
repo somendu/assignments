@@ -1,7 +1,6 @@
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\ems\service\EmployeeService.java
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\ems\service\EmployeeServiceImpl.java
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\EmpMvcAppApplication.java
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\ems\repository\EmployeeRepository.java
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\ems\model\Employee.java
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\ems\util\package-info.java
-D:\Workarea\Software\emp-mvc-app\src\main\java\com\glearning\ems\controller\EmployeeController.java
+D:\Work-Area\Workspaces\assignments\emp-mvc-app\src\main\java\com\glearning\ems\model\Employee.java
+D:\Work-Area\Workspaces\assignments\emp-mvc-app\src\main\java\com\glearning\ems\repository\EmployeeRepository.java
+D:\Work-Area\Workspaces\assignments\emp-mvc-app\src\main\java\com\glearning\ems\service\EmployeeServiceImpl.java
+D:\Work-Area\Workspaces\assignments\emp-mvc-app\src\main\java\com\glearning\EmpMvcAppApplication.java
+D:\Work-Area\Workspaces\assignments\emp-mvc-app\src\main\java\com\glearning\ems\service\EmployeeService.java
+D:\Work-Area\Workspaces\assignments\emp-mvc-app\src\main\java\com\glearning\ems\controller\EmployeeController.java

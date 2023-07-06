@@ -26,7 +26,7 @@
 		</thead>
         <tbody>
             <!-- For loop in thymeleaf-->
-            <tr th:each="employee : ${employees}">
+            <tr th:each="employee : ${viewallEmployees}">
                 <td th:text="${employee.firstName}"></td>
                 <td th:text="${employee.lastName}"></td>
                 <td th:text="${employee.email}"></td>
