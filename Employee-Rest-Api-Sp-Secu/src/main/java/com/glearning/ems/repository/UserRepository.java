@@ -7,6 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.glearning.ems.model.User;
 
+/**
+ * 
+ * User Repository
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 

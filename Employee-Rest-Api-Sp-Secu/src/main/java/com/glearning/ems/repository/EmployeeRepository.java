@@ -7,6 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.glearning.ems.model.Employee;
 
+/**
+ * 
+ * Employee Repository
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 

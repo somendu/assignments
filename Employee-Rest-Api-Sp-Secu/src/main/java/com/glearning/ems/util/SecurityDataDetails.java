@@ -25,26 +25,26 @@ public class SecurityDataDetails {
 	@Transactional
 	public void loadUsers(ApplicationReadyEvent event) {
 
-		User kiran = new User("kiran", this.passwordEncoder.encode("welcome"));
-		User vinay = new User("vinay", this.passwordEncoder.encode("welcome"));
-		User ramesh = new User("ramesh", this.passwordEncoder.encode("welcome"));
+		User userOne = new User("Aditi", this.passwordEncoder.encode("aditi"));
+		User userTwo = new User("Somendu", this.passwordEncoder.encode("somendu"));
+		User userThree = new User("Rahul", this.passwordEncoder.encode("rahul"));
 
 		Role userRole = new Role("ROLE_USER");
 		Role adminRole = new Role("ROLE_ADMIN");
 		Role superAdminRole = new Role("ROLE_SUPER_ADMIN");
 
-		kiran.addRole(userRole);
+		userOne.addRole(userRole);
 
-		vinay.addRole(userRole);
-		vinay.addRole(adminRole);
+		userTwo.addRole(userRole);
+		userTwo.addRole(adminRole);
 
-		ramesh.addRole(userRole);
-		ramesh.addRole(adminRole);
-		ramesh.addRole(superAdminRole);
+		userThree.addRole(userRole);
+		userThree.addRole(adminRole);
+		userThree.addRole(superAdminRole);
 
-		this.userRepository.save(kiran);
-		this.userRepository.save(vinay);
-		this.userRepository.save(ramesh);
+		this.userRepository.save(userOne);
+		this.userRepository.save(userTwo);
+		this.userRepository.save(userThree);
 
 	}
 

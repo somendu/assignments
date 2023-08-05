@@ -13,6 +13,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * 
+ * Security Configuration
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
 @Configuration
 public class SecurityConfiguration {
 
@@ -33,7 +41,6 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	// Used for authentication
 	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = http
 				.getSharedObject(AuthenticationManagerBuilder.class);
@@ -41,7 +48,6 @@ public class SecurityConfiguration {
 		return authenticationManagerBuilder.build();
 	}
 
-	// Authorization
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.cors().disable();
@@ -50,11 +56,10 @@ public class SecurityConfiguration {
 		http.authorizeRequests().antMatchers("/h2-console**", "/login**", "/logout**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/employees**", "/api/employees/**",
 						"/api/employees/search/{firstName}**", "/api/employees/sort**")
-				.hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
-				.antMatchers(HttpMethod.POST, "/api/employees**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-				.antMatchers(HttpMethod.PUT, "/api/employees/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/employees/**").hasRole("SUPER_ADMIN")
-				.anyRequest().fullyAuthenticated().and().formLogin().and().httpBasic();
+				.hasAnyRole("USER", "ADMIN", "SUPER_ADMIN").antMatchers(HttpMethod.POST, "/api/employees**")
+				.hasAnyRole("ADMIN", "SUPER_ADMIN").antMatchers(HttpMethod.PUT, "/api/employees/**")
+				.hasAnyRole("ADMIN", "SUPER_ADMIN").antMatchers(HttpMethod.DELETE, "/api/employees/**")
+				.hasRole("SUPER_ADMIN").anyRequest().fullyAuthenticated().and().formLogin().and().httpBasic();
 
 		return http.build();
 	}

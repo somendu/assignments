@@ -18,6 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.glearning.ems.model.Employee;
 import com.glearning.ems.service.EmployeeService;
 
+/**
+ * 
+ * Employee Controller
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
@@ -65,10 +73,10 @@ public class EmployeeController {
 	public ResponseEntity<List<Employee>> getAllEmployeesSortedByFirstName(
 			@RequestParam(required = false, name = "order") String order) {
 		List<Employee> employees;
-		if(order.equalsIgnoreCase("asc")) {
-			employees= employeeService.getAllEmployeesSortedByFirstName("asc");
-		}else {
-			employees= employeeService.getAllEmployeesSortedByFirstName("desc");
+		if (order.equalsIgnoreCase("asc")) {
+			employees = employeeService.getAllEmployeesSortedByFirstName("asc");
+		} else {
+			employees = employeeService.getAllEmployeesSortedByFirstName("desc");
 		}
 		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}

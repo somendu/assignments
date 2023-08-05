@@ -3,16 +3,26 @@ package com.glearning.ems.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import com.glearning.ems.exception.EmployeeNotFoundException;
 import com.glearning.ems.model.Employee;
 import com.glearning.ems.repository.EmployeeRepository;
 import com.glearning.ems.service.EmployeeService;
 
+/**
+ * 
+ * Employee Service Implementation Class
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
@@ -59,14 +69,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public List<Employee> getAllEmployeesSortedByFirstName(String order) {
 		if (order.equalsIgnoreCase("asc")) {
-            return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"));
-        } else if (order.equalsIgnoreCase("desc")) {
-            return employeeRepository.findAll(Sort.by(Sort.Direction.DESC, "firstName"));
-        }else {
-        	throw new IllegalArgumentException("Invalid sort order: " +order);
-        }
-    }
+			return employeeRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"));
+		} else if (order.equalsIgnoreCase("desc")) {
+			return employeeRepository.findAll(Sort.by(Sort.Direction.DESC, "firstName"));
+		} else {
+			throw new IllegalArgumentException("Invalid sort order: " + order);
+		}
+	}
 
 }
-
-

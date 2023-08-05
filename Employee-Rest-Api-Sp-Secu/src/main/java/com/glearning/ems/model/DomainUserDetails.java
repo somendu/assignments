@@ -7,20 +7,25 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * 
+ * Domain User Details
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
+public class DomainUserDetails implements UserDetails {
 
-public class DomainUserDetails implements UserDetails{
-	
 	private User user;
+
 	public DomainUserDetails(User user) {
 		this.user = user;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.user.getRoles()
-				.stream()
-				.map(Role::getRole)
-				.map(SimpleGrantedAuthority::new)
+		return this.user.getRoles().stream().map(Role::getRole).map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toSet());
 	}
 

@@ -17,29 +17,33 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * Role
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = "users")
 public class Role {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String role;
-	
-	public Role(String role){
+
+	public Role(String role) {
 		this.role = role;
 	}
-	
+
 	@ManyToMany
-	@JoinTable(
-			name = "users_roles",
-			joinColumns = @JoinColumn(name="role_id", nullable = false),
-			inverseJoinColumns = @JoinColumn(name="user_id", nullable = false)
-			)
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "role_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "user_id", nullable = false))
 	private Set<User> users = new HashSet<>();
 
 }

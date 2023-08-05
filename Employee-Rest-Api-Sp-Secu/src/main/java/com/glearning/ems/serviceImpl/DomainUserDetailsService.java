@@ -9,18 +9,24 @@ import org.springframework.stereotype.Service;
 import com.glearning.ems.model.DomainUserDetails;
 import com.glearning.ems.repository.UserRepository;
 
+/**
+ * 
+ * Domain User Details Service Interface
+ * 
+ * @author Aditi Awasthi
+ *
+ * @since 05-Aug-2023
+ */
 @Service
 public class DomainUserDetailsService implements UserDetailsService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserDetails user= this.userRepository
-		.findByUsername(username)
-		.map(DomainUserDetails::new)
-		.orElseThrow(() -> new UsernameNotFoundException("invalid username"));
+		UserDetails user = this.userRepository.findByUsername(username).map(DomainUserDetails::new)
+				.orElseThrow(() -> new UsernameNotFoundException("invalid username"));
 		return user;
 	}
 
