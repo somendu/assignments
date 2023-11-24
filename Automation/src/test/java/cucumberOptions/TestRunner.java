@@ -13,7 +13,8 @@ import io.cucumber.testng.CucumberOptions;
  *
  * @since 21-Nov-2023
  */
-@CucumberOptions(features = "src/test/java/features", glue = "stepDefinitions", monochrome = true)
+@CucumberOptions(features = "src/test/java/features", dryRun = true, glue = "stepDefinitions", monochrome = true, plugin = {
+		"pretty", "html:target/cucumber.html", "json:target/cucumber.json" })
 public class TestRunner extends AbstractTestNGCucumberTests {
 
 }

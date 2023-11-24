@@ -5,20 +5,22 @@ Background:
   	And launch the browser from config variables 
   	And hit the home page url of banking site
 
-  @RegressionTest
-  Scenario: Admin page default login
-    Given User is on Netbanking Login Page
-    When User login into Application with "admin" and password "1234"
-    Then Home page is displayed
-    And Cards are displayed
+ 
 
-	@RegressionTest
+	@RegressionTest @NetBanking
   Scenario: User page default login
     Given User is on Netbanking Login Page
     When User login into Application with user1 and password 9023
     Then Home page is displayed
     And Cards are displayed
 
+	@SokeTest @RegressionTest @Mortgage
+  Scenario: Mortgage User page default login
+    Given User is on Netbanking Login Page
+    When User login into Application with user1 and password 9023
+    Then Home page is displayed
+    And Cards are displayed
+    
 	@SmokeTest @RegressionTest
   Scenario Outline: User page default login
     Given User is on Netbanking Login Page
