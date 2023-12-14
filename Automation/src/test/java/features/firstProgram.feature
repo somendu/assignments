@@ -1,7 +1,7 @@
 Feature: Application Login
 
 Background:
-  	#Given setup the entries in database
+  	Given setup the entries in database
   	And launch the browser from config variables 
   	And hit the home page url of banking site
 
