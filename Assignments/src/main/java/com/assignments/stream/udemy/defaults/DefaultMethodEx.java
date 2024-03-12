@@ -20,8 +20,8 @@ public class DefaultMethodEx {
 
 	public static void main(String[] args) {
 
-		List<String> namesList = StudentDataBase.getAllStudents().stream()
-				.map(Student::getName).collect(Collectors.toList());
+		List<String> namesList = StudentDataBase.getAllStudents().stream().map(Student::getName)
+				.collect(Collectors.toList());
 
 		// List<String> namesList = Arrays.asList("Adam", "Dan", "Maria",
 		// "Bobby");
@@ -32,13 +32,11 @@ public class DefaultMethodEx {
 
 		namesList.sort(Comparator.naturalOrder());
 
-		System.out.println(
-				"Sorted List using Comparator.naturalOrder" + namesList);
+		System.out.println("Sorted List using Comparator.naturalOrder" + namesList);
 
 		namesList.sort(Comparator.reverseOrder());
 
-		System.out.println(
-				"Sorted List using Comparator.reverseOrder" + namesList);
+		System.out.println("Sorted List using Comparator.reverseOrder" + namesList);
 	}
 
 }

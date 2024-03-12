@@ -6,6 +6,7 @@ package com.assignments.stream.udemy.defaults;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import com.assignments.stream.udemy.data.Student;
 import com.assignments.stream.udemy.data.StudentDataBase;
@@ -17,25 +18,24 @@ import com.assignments.stream.udemy.data.StudentDataBase;
  */
 public class DefaultMethodsEx2 {
 
-	public static Consumer<Student> studentConsumer = (student -> System.out
-			.println(student));
+	public static Consumer<Student> studentConsumer = (student -> System.out.println(student));
 
-	static Comparator<Student> nameComparator = Comparator
-			.comparing(Student::getName);
+	static Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
 
-	static Comparator<Student> gradeComparator = Comparator
-			.comparingDouble(Student::getGradeLevel);
+	static Comparator<Student> gradeComparator = Comparator.comparingDouble(Student::getGradeLevel);
 
 	public static void sortByName(List<Student> studentList) {
 
 		System.out.println("After Sort : ");
 
-		Comparator<Student> nameComparator = Comparator
-				.comparing(Student::getName);
+		Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
+
+		UnaryOperator<Student> studentUnaryOperator = UnaryOperator.identity();
 
 		studentList.sort(nameComparator);
 
 		studentList.forEach(studentConsumer);
+		studentList.replaceAll(studentUnaryOperator);
 
 	}
 
@@ -43,8 +43,7 @@ public class DefaultMethodsEx2 {
 
 		System.out.println("After Sort GPA : ");
 
-		Comparator<Student> gradeComparator = Comparator
-				.comparingDouble(Student::getGradeLevel);
+		Comparator<Student> gradeComparator = Comparator.comparingDouble(Student::getGradeLevel);
 
 		studentList.sort(gradeComparator);
 
@@ -66,8 +65,7 @@ public class DefaultMethodsEx2 {
 
 		System.out.println("After sortWithNullValues nullsLast: ");
 
-		Comparator<Student> studentComparator = Comparator
-				.nullsLast(nameComparator);
+		Comparator<Student> studentComparator = Comparator.nullsLast(nameComparator);
 
 		studentList.sort(studentComparator);
 
