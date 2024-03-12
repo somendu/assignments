@@ -1,0 +1,7 @@
+= Spring Examples
+
+These projects present how Vert.x and Spring can interact.
+
+== Spring Verticle Factory
+
+The link:spring-verticle-factory/README.adoc[Spring Verticle Factory Example] shows how you can build a Verticle factory based on the Spring container.

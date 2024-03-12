@@ -1,0 +1,134 @@
+vert.x - application 
+
+moving from one route to another 
+
+	Here's a breakdown of how it works:
+
+	Route Handler Accesses Event Bus:  A route handler in your Vert.x web application can access the event bus using the vertx instance available in the RoutingContext.
+
+	Sending and Receiving Messages: The route handler can then send messages to specific addresses on the event bus using vertx.eventBus().send(address, message).  On the receiving end, another verticle (potentially another route handler) can subscribe to that address using vertx.eventBus().consumer(address, handler). The handler will be invoked whenever a message is sent to that address.
+
+	here are some resources for further learning:
+
+	Vert.x Event Bus: https://vertx.io/docs/apidocs/io/vertx/core/eventbus/EventBus.html
+	How to Work With Multiple Verticles and Communication in Vert.x: https://manningbooks.medium.com/verticles-the-basic-processing-units-of-vert-x-22ed1095c9bf
+
+
+NRD - Application 
+	couchbase, kafka 
+
+Orchestration, 
+
+	Orchestration can be used instead to extract the business logic of each individual microservice or even to provide visibility into a sequence of microservices calls.
+
+
+Transaction Logging - TLS
+
+
+TLS Handshake Logs: Some applications or servers might offer options to log details about the TLS handshake process. This could include information like:
+
+			TLS version used
+			Cipher suites negotiated
+			Certificate details (without private key information)
+			Success or failure of the handshake
+			
+Security Event Logs: Security software or firewalls might log events related to TLS connections. This could include:
+
+		Connection attempts
+		Certificate validation results (e.g., expired certificate)
+		Suspicious activity like weak cipher suites used
+		
+Application-Specific Logs:  Applications might log information tied to TLS connections,  like:
+
+		User attempting to access a secure resource
+		Errors during encrypted data transfer
+
+
+Performance related 
+	How do you troubleshoot 
+		Heap and Stack 
+		Memory Management 
+		
+	Select appropriate data structures for your needs. For example, use HashMap for fast lookups by key, ArrayList for efficient random access, and LinkedList for frequent insertions/removals.
+	Consider primitive data types (int, double) instead of their wrapper classes (Integer, Double) when appropriate, as object creation can have overhead.
+	
+	Algorithms & Data Structures: Choose efficient algorithms and data structures for your tasks (e.g., HashMap for lookups, ArrayList for random access).
+	Profiling & Optimization: Use profiling to identify bottlenecks and optimize those sections (e.g., avoid unnecessary object creation, minimize method calls).
+	Utilize Collections Framework: Leverage efficient implementations like ArrayList and HashSet from the Java Collections Framework.
+	Database Optimization: Optimize database queries (e.g., use indexes) if your application is database-bound.
+	Consider Caching: Implement caching for frequently accessed data to reduce database load.
+		
+Frontend Performance:
+	Response Times: Measure how long it takes for the web server to respond to a user request. This includes factors like server processing time, database queries, and static content loading.
+	Page Load Time: Track the total time it takes for a web page to fully load in the user's browser. This is a crucial metric for user experience.
+	Resource Load Times: Monitor individual components like images, scripts, and stylesheets to identify bottlenecks. Tools like Google PageSpeed Insights can help with this.
+Backend Performance:
+	Server Resource Utilization: Monitor CPU, memory, and network usage on your web server to identify potential resource constraints.
+	Database Performance: Track database query times and identify slow or inefficient queries that might be impacting performance.
+	Application Errors: Monitor for errors in your application code that could be causing unexpected behavior or crashes.
+		
+
+plaindrome - program 
+
+	//Imperative 
+	public class PalindromeChecker {
+
+	  public static boolean isPalindrome(String text) {
+		text = text.toLowerCase(); // Handle case sensitivity (optional)
+		int left = 0;
+		int right = text.length() - 1;
+
+		while (left < right) {
+		  if (text.charAt(left) != text.charAt(right)) {
+			return false;
+		  }
+		  left++;
+		  right--;
+		}
+		return true;
+	  }
+
+	  public static void main(String[] args) {
+		String text = "racecar";
+		boolean isPalindrome = isPalindrome(text);
+		System.out.println(text + " is palindrome: " + isPalindrome);
+	  }
+	}
+	
+	
+	//Declarative 
+	public class PalindromeChecker {
+
+	  public static boolean isPalindrome(String text) {
+		text = text.toLowerCase(); // Handle case sensitivity (optional)
+		StringBuilder reversed = new StringBuilder(text).reverse();
+		return text.equals(reversed.toString());
+	  }
+
+	  public static void main(String[] args) {
+		String text = "madam";
+		boolean isPalindrome = isPalindrome(text);
+		System.out.println(text + " is palindrome: " + isPalindrome);
+	  }
+	}
+
+
+number of char count - program 
+
+public class CharCount {
+
+  public static void main(String[] args) {
+    String str = "Mississippi";
+    HashMap<Character, Integer> charCountMap = new HashMap<>();
+
+    for (char c : str.toCharArray()) {
+      int count = charCountMap.getOrDefault(c, 0);
+      charCountMap.put(c, count + 1);
+    }
+
+    System.out.println("Character counts:");
+    for (Character key : charCountMap.keySet()) {
+      System.out.println(key + ": " + charCountMap.get(key));
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "service-provider-proxy",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@vertx/eventbus-bridge-client.js": "^1.0.0-3-SNAPSHOT"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  }
+}

@@ -1,0 +1,180 @@
+Collections in Java
+
+	The framework defines interfaces like Collection, List, Set, and Map. These interfaces specify the operations (methods) that a collection should support (e.g., add, remove, contains).
+	
+	Concrete classes like ArrayList, LinkedList, HashSet, TreeSet, and HashMap implement these interfaces, providing specific data structures with different characteristics (e.g., ordering, duplicates).
+
+
+Polymorphism and Method Overloading Difference 
+
+Feature	Method 					Overloading				Polymorphism
+Same method name				Yes						Yes
+Different parameter lists		Required				Not required (can have same signature)
+Binding time					Compile time			Runtime
+Inheritance						Not required			Often involves inheritance
+Example							Multiple add methods	Overridden makeSound method
+
+
+Structure of springboot application 
+
+	Spring Boot applications typically follow a layered structure:
+
+		Presentation Layer: Handles user interaction (controllers, views, front-end technologies).
+		
+		Business Logic Layer: Encapsulates core functionalities (services, domain objects).
+		
+		Persistence Layer: Interacts with data storage (repositories, DAOs).
+		
+		Configuration Layer: Manages application configuration (@SpringBootApplication, configuration classes, properties).
+		
+		(Optional) Security Layer: Implements authentication and authorization (Spring Security or custom).
+
+
+previous project explanation and role 
+
+reverse a sentence program 
+
+public class ReverseSentence {
+
+  public static String reverseSentence(String sentence) {
+    String[] words = sentence.split(" "); // Split the sentence into words
+    StringBuilder reversedSentence = new StringBuilder();
+
+    for (int i = words.length - 1; i >= 0; i--) {
+      reversedSentence.append(words[i]).append(" ");
+    }
+
+    return reversedSentence.toString().trim(); // Remove trailing space
+  }
+
+  public static void main(String[] args) {
+    String sentence = "Hello world, how are you?";
+    String reversedSentence = reverseSentence(sentence);
+    System.out.println("Original sentence: " + sentence);
+    System.out.println("Reversed sentence: " + reversedSentence);
+  }
+}
+
+remove duplicates from arraylist
+
+public class RemoveDuplicates {
+
+  public static ArrayList<String> removeDuplicates(ArrayList<String> list) {
+    // Create a HashSet to store unique elements
+    HashSet<String> uniqueElements = new HashSet<>(list);
+
+    // Clear the original list (optional)
+    list.clear();
+
+    // Add unique elements back to the list
+    list.addAll(uniqueElements);
+
+    return list;
+  }
+
+  public static void main(String[] args) {
+    ArrayList<String> names = new ArrayList<>();
+    names.add("Alice");
+    names.add("Bob");
+    names.add("Charlie");
+    names.add("Alice"); // Duplicate
+
+    System.out.println("Original list: " + names);
+
+    ArrayList<String> uniqueNames = removeDuplicates(names);
+
+    System.out.println("List after removing duplicates: " + uniqueNames);
+  }
+}
+
+public class RemoveDuplicates {
+
+  public static ArrayList<String> removeDuplicates(ArrayList<String> list) {
+    for (int i = 0; i < list.size() - 1; i++) {
+      for (int j = i + 1; j < list.size(); j++) {
+        if (list.get(i).equals(list.get(j))) {
+          list.remove(j); // Remove duplicate
+          j--; // Decrement j to avoid skipping elements
+        }
+      }
+    }
+    return list;
+  }
+
+  public static void main(String[] args) {
+    // ... same as previous example
+  }
+}
+
+
+stream and design patterns
+
+use of synchronized keyword in java
+
+	Here's a breakdown of how synchronized works in Java:
+
+	Synchronized Block: You can mark a specific code block within a method as synchronized using the synchronized keyword followed by an object within parentheses. This object acts as a lock (monitor) that controls access to the code block.
+
+	Synchronized Method: You can declare an entire method as synchronized. In this case, the entire method body becomes a synchronized block, and the lock is implicitly the object instance on which the method is called.
+
+	By effectively using synchronized, you can ensure thread safety in your Java applications, leading to predictable and reliable behavior in multithreaded scenarios.
+
+Java 8 Design Pattern
+
+Authentication and Authorization 
+
+	Imagine a web application with a protected resource (e.g., admin dashboard).
+
+	User Login: The user enters their username and password.
+	Authentication: The application uses a chosen mechanism (e.g., database check) to verify the credentials and authenticate the user.
+	Authorization: If authentication is successful, the application checks the user's role (e.g., from a database or stored in a token).
+
+Spring boot Rest API 
+
+
+
+Spring Boot annotations 
+
+Here are a few commonly used Spring Boot annotations:
+
+	1. @SpringBootApplication: This is a powerful annotation that combines the functionality of three other annotations:
+
+	@EnableAutoConfiguration: Enables automatic configuration of beans based on the presence of libraries on the classpath. Spring Boot scans for common libraries and configures beans accordingly, reducing boilerplate code.
+	@ComponentScan: Scans a base package or packages for components (e.g., @Controller, @Service, @Repository) and registers them with the Spring application context. This allows Spring to discover and manage your beans.
+	@Configuration: Marks the class as a Java Bean configuration class. This class can define beans using methods annotated with @Bean.
+	
+	2. @Controller: This annotation marks a class as a web request handling component. Spring Boot creates an instance of the annotated class and maps incoming HTTP requests to handler methods within the class. You can use annotations like @RequestMapping to define specific URL mappings for these methods.
+
+	3. @Service: This annotation is used to mark a class that provides business logic functionalities. Spring Boot creates an instance of the annotated class as a singleton bean and manages its lifecycle. Services can be injected into other components (e.g., controllers) using dependency injection.
+
+	4. @Repository: This annotation is used to mark a class that interacts with data access layer (e.g., database). Spring Boot creates an instance of the annotated class and provides features like dependency injection for data access libraries like JPA.
+
+	5. @Autowired: This annotation is used to inject dependencies into a bean constructor, method, or field. Spring Boot automatically resolves the dependency and injects the appropriate bean instance. This promotes loose coupling and simplifies bean management.
+
+	6. @RequestMapping: This annotation is used on methods within a @Controller class to define the path mappings for incoming HTTP requests. You can specify the HTTP method (e.g., GET, POST, PUT) and the path for the request that the method should handle.
+
+
+
+@Scope annotations 
+
+Here's a breakdown of commonly used @Scope values:
+
+	@Singleton (default): Only one instance of the bean is created and shared throughout the Spring application context. This is the default scope for most beans.
+	
+	@Prototype: A new instance of the bean is created for every injection point. This is useful for beans that maintain internal state that shouldn't be shared between different parts of the application.
+	
+	@Request (web-specific): A new instance of the bean is created for each HTTP request. This is useful for beans that are specific to a particular web request and don't need to maintain state across requests.
+	
+	@Session (web-specific): A new instance of the bean is created for each HTTP session. This is useful for beans that need to maintain state across multiple requests within the same user session.
+	
+	@Application (web-specific, less common): Similar to singleton, but the bean instance is shared across multiple servlet-based applications running in the same ServletContext (rarely used).
+
+Singelton Pattern
+
+	@Singleton (default): Only one instance of the bean is created and shared throughout the Spring application context. This is the default scope for most beans.
+	
+Testing tools and scenarios 
+
+	BDD, Junit 
+	
+	@Given, @When, @Then 

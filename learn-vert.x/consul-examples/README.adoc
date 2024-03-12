@@ -1,0 +1,15 @@
+= Vert.x Consul Client examples
+
+== Start Consul instance
+
+To run this example, you need a running Consul instance
+
+[source,bash]
+----
+consul agent -data-dir=/tmp/kekeke -server -ui -bootstrap=1
+----
+
+== Languages
+
+* link:src/main/java/io/vertx/examples/consul/ConsulClientVerticle.java[ConsulClientVerticle.java]
+
