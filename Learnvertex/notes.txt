@@ -53,9 +53,13 @@ Performance related
 	Consider primitive data types (int, double) instead of their wrapper classes (Integer, Double) when appropriate, as object creation can have overhead.
 	
 	Algorithms & Data Structures: Choose efficient algorithms and data structures for your tasks (e.g., HashMap for lookups, ArrayList for random access).
+	
 	Profiling & Optimization: Use profiling to identify bottlenecks and optimize those sections (e.g., avoid unnecessary object creation, minimize method calls).
+	
 	Utilize Collections Framework: Leverage efficient implementations like ArrayList and HashSet from the Java Collections Framework.
+	
 	Database Optimization: Optimize database queries (e.g., use indexes) if your application is database-bound.
+	
 	Consider Caching: Implement caching for frequently accessed data to reduce database load.
 		
 Frontend Performance:
