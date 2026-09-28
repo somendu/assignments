@@ -1,67 +1,66 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.optional;
-
-import java.util.Optional;
 
 import com.assignments.udemy.stream.udemy.Student;
 import com.assignments.udemy.stream.udemy.StudentDataBase;
+import java.util.Optional;
 
 /**
  * @author Somendu
- *
  * @since 03-Oct-2020
  */
 public class OptionalOrElseExample {
 
-	// orElse
-	public static String optionalOrElse() {
+  // orElse
+  public static String optionalOrElse() {
 
-		Optional<Student> studentOptional = Optional.ofNullable(StudentDataBase.studentAdamSupplier.get());
+    Optional<Student> studentOptional =
+        Optional.ofNullable(StudentDataBase.studentAdamSupplier.get());
 
-		// Optional<Student> studentOptional = Optional.ofNullable(null);
+    // Optional<Student> studentOptional = Optional.ofNullable(null);
 
-		String name = studentOptional.map(Student::getName).orElse("Default");
+    String name = studentOptional.map(Student::getName).orElse("Default");
 
-		return name;
-	}
+    return name;
+  }
 
-	// orElseGet
+  // orElseGet
 
-	public static String optionalOrElseGet() {
+  public static String optionalOrElseGet() {
 
-		Optional<Student> studentOptional = Optional.ofNullable(StudentDataBase.studentAdamSupplier.get());
+    Optional<Student> studentOptional =
+        Optional.ofNullable(StudentDataBase.studentAdamSupplier.get());
 
-		// Optional<Student> studentOptional = Optional.ofNullable(null);
+    // Optional<Student> studentOptional = Optional.ofNullable(null);
 
-		String name = studentOptional.map(Student::getName).orElseGet(() -> "default");
+    String name = studentOptional.map(Student::getName).orElseGet(() -> "default");
 
-		return name;
-	}
+    return name;
+  }
 
-	// orElseThrow
+  // orElseThrow
 
-	public static String optionalOrElseThrow() {
+  public static String optionalOrElseThrow() {
 
-		// Optional<Student> studentOptional = Optional
-		// .ofNullable(StudentDataBase.studentAdamSupplier.get());
+    // Optional<Student> studentOptional = Optional
+    // .ofNullable(StudentDataBase.studentAdamSupplier.get());
 
-		Optional<Student> studentOptional = Optional.ofNullable(null);
+    Optional<Student> studentOptional = Optional.ofNullable(null);
 
-		String name = studentOptional.map(Student::getName)
-				.orElseThrow(() -> new RuntimeException("No data Available"));
+    String name =
+        studentOptional
+            .map(Student::getName)
+            .orElseThrow(() -> new RuntimeException("No data Available"));
 
-		return name;
-	}
+    return name;
+  }
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		System.out.println("orElse " + optionalOrElse());
+    System.out.println("orElse " + optionalOrElse());
 
-		System.out.println("orElseGet " + optionalOrElse());
+    System.out.println("orElseGet " + optionalOrElse());
 
-		System.out.println("orElseGet " + optionalOrElseThrow());
-	}
-
+    System.out.println("orElseGet " + optionalOrElseThrow());
+  }
 }

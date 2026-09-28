@@ -1,31 +1,28 @@
-/**
- * 
- */
+/** */
 package com.assignments.self.j8.diamond;
 
 /**
  * @author Somendu
- *
  * @since 06-Aug-2020
  */
 @FunctionalInterface
 public interface Interface1 {
 
-	void method1(String str);
+  void method1(String str);
 
-	default void log(String str) {
-		System.out.println("I1 logging::" + str);
-	}
+  default void log(String str) {
+    System.out.println("I1 logging::" + str);
+  }
 
-	static void print(String str) {
-		System.out.println("Printing " + str);
-	}
+  static void print(String str) {
+    System.out.println("Printing " + str);
+  }
 
-	// trying to override Object method gives compile-time error as
-	// "A default method cannot override a method from java.lang.Object"
+  // trying to override Object method gives compile-time error as
+  // "A default method cannot override a method from java.lang.Object"
 
-//	default String toString(){
-//		return "i1";
-//	}
+  //	default String toString(){
+  //		return "i1";
+  //	}
 
 }

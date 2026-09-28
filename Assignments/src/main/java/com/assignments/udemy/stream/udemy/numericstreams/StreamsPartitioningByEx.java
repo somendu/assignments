@@ -1,50 +1,47 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.numericstreams;
 
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toSet;
 
+import com.assignments.udemy.stream.udemy.Student;
+import com.assignments.udemy.stream.udemy.StudentDataBase;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import com.assignments.udemy.stream.udemy.Student;
-import com.assignments.udemy.stream.udemy.StudentDataBase;
-
 /**
  * @author Somendu
- *
  * @since 01-Oct-2020
  */
 public class StreamsPartitioningByEx {
 
-	public static void partitioning1() {
+  public static void partitioning1() {
 
-		Predicate<Student> stuentPredicate = (student -> student.getGender().equalsIgnoreCase("female"));
+    Predicate<Student> stuentPredicate =
+        (student -> student.getGender().equalsIgnoreCase("female"));
 
-		Map<Boolean, List<Student>> studentListMap = StudentDataBase.getAllStudents().stream()
-				.collect(partitioningBy(stuentPredicate));
+    Map<Boolean, List<Student>> studentListMap =
+        StudentDataBase.getAllStudents().stream().collect(partitioningBy(stuentPredicate));
 
-		System.out.println(studentListMap);
-	}
+    System.out.println(studentListMap);
+  }
 
-	public static void partitioning2() {
+  public static void partitioning2() {
 
-		Predicate<Student> stuentPredicate = (student -> student.getGender().equalsIgnoreCase("female"));
+    Predicate<Student> stuentPredicate =
+        (student -> student.getGender().equalsIgnoreCase("female"));
 
-		Map<Boolean, Set<Student>> studentListMap = StudentDataBase.getAllStudents().stream()
-				.collect(partitioningBy(stuentPredicate, toSet()));
+    Map<Boolean, Set<Student>> studentListMap =
+        StudentDataBase.getAllStudents().stream().collect(partitioningBy(stuentPredicate, toSet()));
 
-		System.out.println(studentListMap);
-	}
+    System.out.println(studentListMap);
+  }
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		// partitioning1();
-		partitioning2();
-	}
-
+    // partitioning1();
+    partitioning2();
+  }
 }

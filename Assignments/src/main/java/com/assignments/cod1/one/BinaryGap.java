@@ -1,48 +1,43 @@
-/**
- * 
- */
+/** */
 package com.assignments.cod1.one;
 
 /**
  * @author somendu
- *
  */
 public class BinaryGap {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		System.out.println(findBinaryGap(1041));
+    System.out.println(findBinaryGap(1041));
+  }
 
-	}
+  private static int findBinaryGap(int N) {
 
-	private static int findBinaryGap(int N) {
+    int maxGap = 0;
 
-		int maxGap = 0;
+    int binaryGap = -1;
 
-		int binaryGap = -1;
+    while (N != 0) {
 
-		while (N != 0) {
+      if ((N % 2) == 1) {
 
-			if ((N % 2) == 1) {
+        if (maxGap < binaryGap) {
 
-				if (maxGap < binaryGap) {
+          maxGap = binaryGap;
+        }
 
-					maxGap = binaryGap;
-				}
+        binaryGap = 0;
 
-				binaryGap = 0;
+      } else if (binaryGap != -1) {
 
-			} else if (binaryGap != -1) {
+        binaryGap++;
+      }
 
-				binaryGap++;
-			}
-
-			N = N / 2;
-		}
-		return maxGap;
-	}
-
+      N = N / 2;
+    }
+    return maxGap;
+  }
 }

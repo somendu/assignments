@@ -1,10 +1,10 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.numericstreams;
 
 import static java.util.stream.Collectors.groupingBy;
 
+import com.assignments.udemy.stream.udemy.Student;
+import com.assignments.udemy.stream.udemy.StudentDataBase;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,123 +12,136 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.assignments.udemy.stream.udemy.Student;
-import com.assignments.udemy.stream.udemy.StudentDataBase;
-
 /**
  * @author Somendu
- *
  * @since 01-Oct-2020
  */
 public class StreamsGroupByEx {
 
-	public static void groupStudentByGender() {
+  public static void groupStudentByGender() {
 
-		Map<String, List<Student>> studentgenderMap = StudentDataBase.getAllStudents().stream()
-				.collect(Collectors.groupingBy(Student::getGender));
+    Map<String, List<Student>> studentgenderMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(Collectors.groupingBy(Student::getGender));
 
-		List<Student> femaleStudentList = studentgenderMap.get("female");
+    List<Student> femaleStudentList = studentgenderMap.get("female");
 
-		System.out.println("Female Student Names: ");
+    System.out.println("Female Student Names: ");
 
-		for (Student student : femaleStudentList) {
-			System.out.println(student.getName() + " ");
-		}
+    for (Student student : femaleStudentList) {
+      System.out.println(student.getName() + " ");
+    }
 
-		List<Student> maleStudentList = studentgenderMap.get("male");
+    List<Student> maleStudentList = studentgenderMap.get("male");
 
-		System.out.println("Male Student Names: ");
+    System.out.println("Male Student Names: ");
 
-		for (Student student : maleStudentList) {
-			System.out.println(student.getName() + " ");
-		}
+    for (Student student : maleStudentList) {
+      System.out.println(student.getName() + " ");
+    }
+  }
 
-	}
+  public static void groupStudentByGrade() {
 
-	public static void groupStudentByGrade() {
+    Map<String, List<Student>> studentGradeMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(
+                Collectors.groupingBy(
+                    student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE"));
 
-		Map<String, List<Student>> studentGradeMap = StudentDataBase.getAllStudents().stream()
-				.collect(Collectors.groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE"));
+    List<Student> outstandingStudentList = studentGradeMap.get("OUTSTANDING");
 
-		List<Student> outstandingStudentList = studentGradeMap.get("OUTSTANDING");
+    System.out.println("Outstanding Student Names: ");
 
-		System.out.println("Outstanding Student Names: ");
+    for (Student student : outstandingStudentList) {
+      System.out.println(student.getName() + " " + student.getGpa());
+    }
 
-		for (Student student : outstandingStudentList) {
-			System.out.println(student.getName() + " " + student.getGpa());
-		}
+    List<Student> averageStudentList = studentGradeMap.get("AVERAGE");
 
-		List<Student> averageStudentList = studentGradeMap.get("AVERAGE");
+    System.out.println("Average Student Names: ");
 
-		System.out.println("Average Student Names: ");
+    for (Student student : averageStudentList) {
+      System.out.println(student.getName() + " " + student.getGpa());
+    }
+  }
 
-		for (Student student : averageStudentList) {
-			System.out.println(student.getName() + " " + student.getGpa());
-		}
+  public static void twoLevelGrouping_1() {
 
-	}
+    Map<Integer, Map<String, List<Student>>> studentGradeMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(
+                Collectors.groupingBy(
+                    Student::getGradeLevel,
+                    Collectors.groupingBy(
+                        student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE")));
 
-	public static void twoLevelGrouping_1() {
+    System.out.println(studentGradeMap);
+  }
 
-		Map<Integer, Map<String, List<Student>>> studentGradeMap = StudentDataBase.getAllStudents().stream()
-				.collect(Collectors.groupingBy(Student::getGradeLevel,
-						Collectors.groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE")));
+  public static void twoLevelGrouping_2() {
 
-		System.out.println(studentGradeMap);
-	}
+    Map<Object, Integer> studentGradeMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(
+                Collectors.groupingBy(
+                    (student -> student.getGpa() >= 3.9),
+                    Collectors.summingInt(Student::getNoteBooks)));
 
-	public static void twoLevelGrouping_2() {
+    System.out.println(studentGradeMap);
+  }
 
-		Map<Object, Integer> studentGradeMap = StudentDataBase.getAllStudents().stream().collect(Collectors
-				.groupingBy((student -> student.getGpa() >= 3.9), Collectors.summingInt(Student::getNoteBooks)));
+  public static void twoLevelGrouping_3() {
+    LinkedHashMap<Object, Integer> noteBookMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(
+                groupingBy(
+                    student -> student.getGender().equalsIgnoreCase("male"),
+                    LinkedHashMap::new,
+                    Collectors.summingInt(Student::getNoteBooks)));
 
-		System.out.println(studentGradeMap);
-	}
+    System.out.println(noteBookMap);
+  }
 
-	public static void twoLevelGrouping_3() {
-		LinkedHashMap<Object, Integer> noteBookMap = StudentDataBase.getAllStudents().stream()
-				.collect(groupingBy(student -> student.getGender().equalsIgnoreCase("male"), LinkedHashMap::new,
-						Collectors.summingInt(Student::getNoteBooks)));
+  public static void calculateTopGPA() {
 
-		System.out.println(noteBookMap);
-	}
+    Map<Integer, Student> studentGPATopMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(
+                Collectors.groupingBy(
+                    Student::getGradeLevel,
+                    Collectors.collectingAndThen(
+                        Collectors.maxBy(Comparator.comparing(Student::getGpa)), Optional::get)));
 
-	public static void calculateTopGPA() {
+    System.out.println(studentGPATopMap);
+  }
 
-		Map<Integer, Student> studentGPATopMap =
+  public static void calculateLeastGPA() {
 
-				StudentDataBase.getAllStudents().stream()
-						.collect(Collectors.groupingBy(Student::getGradeLevel, Collectors.collectingAndThen(
-								Collectors.maxBy(Comparator.comparing(Student::getGpa)), Optional::get)));
+    Map<Integer, Student> studentGPALeastMap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(
+                Collectors.groupingBy(
+                    Student::getGradeLevel,
+                    Collectors.collectingAndThen(
+                        Collectors.minBy(Comparator.comparing(Student::getGpa)), Optional::get)));
 
-		System.out.println(studentGPATopMap);
-	}
+    System.out.println(studentGPALeastMap);
+  }
 
-	public static void calculateLeastGPA() {
+  public static void main(String[] args) {
 
-		Map<Integer, Student> studentGPALeastMap =
+    // groupStudentByGender();
 
-				StudentDataBase.getAllStudents().stream()
-						.collect(Collectors.groupingBy(Student::getGradeLevel, Collectors.collectingAndThen(
-								Collectors.minBy(Comparator.comparing(Student::getGpa)), Optional::get)));
+    // groupStudentByGrade();
 
-		System.out.println(studentGPALeastMap);
-	}
+    // twoLevelGrouping_1();
 
-	public static void main(String[] args) {
+    // twoLevelGrouping_2();
 
-		// groupStudentByGender();
+    // twoLevelGrouping_3();
 
-		// groupStudentByGrade();
-
-		// twoLevelGrouping_1();
-
-		// twoLevelGrouping_2();
-
-		// twoLevelGrouping_3();
-
-		// calculateTopGPA();
-		calculateLeastGPA();
-	}
-
+    // calculateTopGPA();
+    calculateLeastGPA();
+  }
 }

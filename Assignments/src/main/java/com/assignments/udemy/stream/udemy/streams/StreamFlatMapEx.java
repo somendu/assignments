@@ -1,65 +1,62 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.streams;
 
+import com.assignments.udemy.stream.udemy.Student;
+import com.assignments.udemy.stream.udemy.StudentDataBase;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.assignments.udemy.stream.udemy.Student;
-import com.assignments.udemy.stream.udemy.StudentDataBase;
-
 /**
  * @author Somendu
- *
  * @since 28-Sep-2020
  */
 public class StreamFlatMapEx {
 
-	public static List<String> printStudentActivities() {
+  public static List<String> printStudentActivities() {
 
-		List<String> studentActivities = StudentDataBase.getAllStudents().stream()
+    List<String> studentActivities =
+        StudentDataBase.getAllStudents().stream()
+            .map(Student::getActivities)
+            .flatMap(List::stream)
+            .distinct()
+            .sorted()
+            .collect(Collectors.toList());
 
-				.map(Student::getActivities)
+    return studentActivities;
+  }
 
-				.flatMap(List::stream).distinct().sorted().collect(Collectors.toList());
+  public static Set<String> printStudentActivitiesSet() {
 
-		return studentActivities;
+    Set<String> studentActivities =
+        StudentDataBase.getAllStudents().stream()
+            .map(Student::getActivities)
+            .flatMap(List::stream)
+            .distinct()
+            .sorted()
+            .collect(Collectors.toSet());
 
-	}
+    return studentActivities;
+  }
 
-	public static Set<String> printStudentActivitiesSet() {
+  public static long countStudentActivities() {
 
-		Set<String> studentActivities = StudentDataBase.getAllStudents().stream()
+    long noOfActivities =
+        StudentDataBase.getAllStudents().stream()
+            .map(Student::getActivities)
+            .flatMap(List::stream)
+            .distinct()
+            .count();
 
-				.map(Student::getActivities)
+    return noOfActivities;
+  }
 
-				.flatMap(List::stream).distinct().sorted().collect(Collectors.toSet());
+  public static void main(String[] args) {
 
-		return studentActivities;
-
-	}
-
-	public static long countStudentActivities() {
-
-		long noOfActivities = StudentDataBase.getAllStudents().stream()
-
-				.map(Student::getActivities)
-
-				.flatMap(List::stream).distinct().count();
-
-		return noOfActivities;
-
-	}
-
-	public static void main(String[] args) {
-
-		System.out.println(printStudentActivities());
-		System.out.println("");
-		System.out.println(printStudentActivitiesSet());
-		System.out.println("");
-		System.out.println(countStudentActivities());
-	}
-
+    System.out.println(printStudentActivities());
+    System.out.println("");
+    System.out.println(printStudentActivitiesSet());
+    System.out.println("");
+    System.out.println(countStudentActivities());
+  }
 }

@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** */
 package com.assignments.k1;
 
 import java.util.ArrayList;
@@ -8,112 +6,109 @@ import java.util.List;
 
 /**
  * @author somendu
- *
  */
 public class OrdinalNumber {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		System.out.println("Using String Array : " + ordinalNumberUsingStringArray(67));
+    System.out.println("Using String Array : " + ordinalNumberUsingStringArray(67));
 
-		System.out.println("Using String List : " + ordinalNumberUsingStringList(21));
+    System.out.println("Using String List : " + ordinalNumberUsingStringList(21));
 
-		System.out.println("Using String No Index List : " + ordinalNumberUsingStringListNoIndex(178));
+    System.out.println("Using String No Index List : " + ordinalNumberUsingStringListNoIndex(178));
+  }
 
-	}
+  public static String ordinalNumberUsingStringList(int number) {
 
-	public static String ordinalNumberUsingStringList(int number) {
+    String ordinalString = "";
 
-		String ordinalString = "";
+    List<String> numberSuffixList = new ArrayList<String>(10);
 
-		List<String> numberSuffixList = new ArrayList<String>(10);
+    numberSuffixList.add(0, "th");
+    numberSuffixList.add(1, "st");
+    numberSuffixList.add(2, "nd");
+    numberSuffixList.add(3, "rd");
+    numberSuffixList.add(4, "th");
+    numberSuffixList.add(4, "th");
+    numberSuffixList.add(5, "th");
+    numberSuffixList.add(6, "th");
+    numberSuffixList.add(7, "th");
+    numberSuffixList.add(8, "th");
+    numberSuffixList.add(9, "th");
 
-		numberSuffixList.add(0, "th");
-		numberSuffixList.add(1, "st");
-		numberSuffixList.add(2, "nd");
-		numberSuffixList.add(3, "rd");
-		numberSuffixList.add(4, "th");
-		numberSuffixList.add(4, "th");
-		numberSuffixList.add(5, "th");
-		numberSuffixList.add(6, "th");
-		numberSuffixList.add(7, "th");
-		numberSuffixList.add(8, "th");
-		numberSuffixList.add(9, "th");
+    if (number % 100 == 11 || number % 100 == 12 || number % 100 == 13) {
 
-		if (number % 100 == 11 || number % 100 == 12 || number % 100 == 13) {
+      ordinalString = number + "th";
 
-			ordinalString = number + "th";
+    } else if (number == 0) {
 
-		} else if (number == 0) {
+      ordinalString = "";
 
-			ordinalString = "";
+    } else {
 
-		} else {
+      ordinalString = number + numberSuffixList.get(number % 10);
+    }
 
-			ordinalString = number + numberSuffixList.get(number % 10);
+    return ordinalString;
+  }
 
-		}
+  public static String ordinalNumberUsingStringListNoIndex(int number) {
 
-		return ordinalString;
-	}
+    String ordinalString = "";
 
-	public static String ordinalNumberUsingStringListNoIndex(int number) {
+    List<String> numberSuffixList = new ArrayList<String>(10);
 
-		String ordinalString = "";
+    numberSuffixList.add("th");
+    numberSuffixList.add("st");
+    numberSuffixList.add("nd");
+    numberSuffixList.add("rd");
+    numberSuffixList.add("th");
+    numberSuffixList.add("th");
+    numberSuffixList.add("th");
+    numberSuffixList.add("th");
+    numberSuffixList.add("th");
+    numberSuffixList.add("th");
+    numberSuffixList.add("th");
 
-		List<String> numberSuffixList = new ArrayList<String>(10);
+    if (number % 100 == 11 || number % 100 == 12 || number % 100 == 13) {
 
-		numberSuffixList.add("th");
-		numberSuffixList.add("st");
-		numberSuffixList.add("nd");
-		numberSuffixList.add("rd");
-		numberSuffixList.add("th");
-		numberSuffixList.add("th");
-		numberSuffixList.add("th");
-		numberSuffixList.add("th");
-		numberSuffixList.add("th");
-		numberSuffixList.add("th");
-		numberSuffixList.add("th");
+      ordinalString = number + "th";
 
-		if (number % 100 == 11 || number % 100 == 12 || number % 100 == 13) {
+    } else if (number == 0) {
 
-			ordinalString = number + "th";
+      ordinalString = "";
 
-		} else if (number == 0) {
+    } else {
 
-			ordinalString = "";
+      ordinalString = number + numberSuffixList.get(number % 10);
+    }
 
-		} else {
+    return ordinalString;
+  }
 
-			ordinalString = number + numberSuffixList.get(number % 10);
+  public static String ordinalNumberUsingStringArray(int number) {
 
-		}
+    String ordinalString = "";
 
-		return ordinalString;
-	}
+    String[] numberSuffixArray =
+        new String[] {"th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"};
 
-	public static String ordinalNumberUsingStringArray(int number) {
+    if (number % 100 == 11 || number % 100 == 12 || number % 100 == 13) {
 
-		String ordinalString = "";
+      ordinalString = number + "th";
 
-		String[] numberSuffixArray = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
+    } else if (number == 0) {
 
-		if (number % 100 == 11 || number % 100 == 12 || number % 100 == 13) {
+      ordinalString = "";
 
-			ordinalString = number + "th";
+    } else {
 
-		} else if (number == 0) {
+      ordinalString = number + numberSuffixArray[number % 10];
+    }
 
-			ordinalString = "";
-
-		} else {
-
-			ordinalString = number + numberSuffixArray[number % 10];
-		}
-
-		return ordinalString;
-	}
+    return ordinalString;
+  }
 }

@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** */
 package com.assignments.self.j8;
 
 import java.util.ArrayList;
@@ -10,47 +8,42 @@ import java.util.function.Consumer;
 
 /**
  * @author Somendu
- *
  * @since 05-Aug-2020
  */
 public class Java8ForEachExample {
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		// creating sample Collection
-		List<Integer> myList = new ArrayList<Integer>();
-		for (int i = 0; i < 10; i++)
-			myList.add(i);
+    // creating sample Collection
+    List<Integer> myList = new ArrayList<Integer>();
+    for (int i = 0; i < 10; i++) myList.add(i);
 
-		// traversing using Iterator
-		Iterator<Integer> it = myList.iterator();
-		while (it.hasNext()) {
-			Integer i = it.next();
-			System.out.println("Iterator Value::" + i);
-		}
+    // traversing using Iterator
+    Iterator<Integer> it = myList.iterator();
+    while (it.hasNext()) {
+      Integer i = it.next();
+      System.out.println("Iterator Value::" + i);
+    }
 
-		// traversing through forEach method of Iterable with anonymous class
-		myList.forEach(new Consumer<Integer>() {
+    // traversing through forEach method of Iterable with anonymous class
+    myList.forEach(
+        new Consumer<Integer>() {
 
-			public void accept(Integer t) {
-				System.out.println("forEach anonymous class Value::" + t);
-			}
+          public void accept(Integer t) {
+            System.out.println("forEach anonymous class Value::" + t);
+          }
+        });
 
-		});
-
-		// traversing with Consumer interface implementation
-		TestConsumer action = new TestConsumer();
-		myList.forEach(action);
-
-	}
-
+    // traversing with Consumer interface implementation
+    TestConsumer action = new TestConsumer();
+    myList.forEach(action);
+  }
 }
 
-//Consumer implementation that can be reused
+// Consumer implementation that can be reused
 class TestConsumer implements Consumer<Integer> {
 
-	public void accept(Integer t) {
-		System.out.println("Consumer impl Value::" + t);
-	}
-
+  public void accept(Integer t) {
+    System.out.println("Consumer impl Value::" + t);
+  }
 }

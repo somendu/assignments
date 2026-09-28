@@ -23,3 +23,11 @@ emp-mvc-app/.factorypath
 emp-mvc-app/.project
 Expense-Track/.settings/
  
+*.class
+*.classpath
+selenium-cucumber-example/.settings/
+*.prefs
+*.project
+Assignments/build/
+Assignments/.idea/
+Assignments/misc/

@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** */
 package com.assignments.k1;
 
 import java.util.ArrayDeque;
@@ -9,176 +7,166 @@ import java.util.Stack;
 
 /**
  * @author somendu
- *
  */
 public class PolishNotation {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		System.out.println(polishNotationUsingStack("5 1 2 + 4 * + 3 -"));
+    System.out.println(polishNotationUsingStack("5 1 2 + 4 * + 3 -"));
 
-		System.out.println(polishNotationUsingDeque("5 1 2 + 4 * + 3 -"));
+    System.out.println(polishNotationUsingDeque("5 1 2 + 4 * + 3 -"));
 
-		System.out.println(polishNotationUsingDequeIfElse("5 1 2 + 4 * + 3 -"));
+    System.out.println(polishNotationUsingDequeIfElse("5 1 2 + 4 * + 3 -"));
+  }
 
-	}
+  public static double polishNotationUsingStack(String expr) {
 
-	public static double polishNotationUsingStack(String expr) {
+    String[] stringTokenArray = expr.split(" ");
+    double finalOutput = 0.0;
+    if (expr.length() == 0) {
+      return finalOutput;
+    }
 
-		String[] stringTokenArray = expr.split(" ");
-		double finalOutput = 0.0;
-		if (expr.length() == 0) {
-			return finalOutput;
-		}
+    String operations = "+-*/";
 
-		String operations = "+-*/";
+    Stack<String> stringStack = new Stack<String>();
 
-		Stack<String> stringStack = new Stack<String>();
+    for (String stringToken : stringTokenArray) {
 
-		for (String stringToken : stringTokenArray)
+      if (!operations.contains(stringToken)) {
+        stringStack.push(stringToken);
+      } else {
+        double first = Double.valueOf(stringStack.pop());
+        double second = Double.valueOf(stringStack.pop());
 
-		{
-			if (!operations.contains(stringToken)) {
-				stringStack.push(stringToken);
-			} else {
-				double first = Double.valueOf(stringStack.pop());
-				double second = Double.valueOf(stringStack.pop());
+        int charIndex = operations.indexOf(stringToken);
 
-				int charIndex = operations.indexOf(stringToken);
+        switch (charIndex) {
+          case 0:
+            stringStack.push(String.valueOf(first + second));
+            break;
+          case 1:
+            stringStack.push(String.valueOf(second - first));
+            break;
+          case 2:
+            stringStack.push(String.valueOf(first * second));
+            break;
+          case 3:
+            stringStack.push(String.valueOf(second / first));
+            break;
+        }
+      }
+    }
 
-				switch (charIndex) {
-				case 0:
-					stringStack.push(String.valueOf(first + second));
-					break;
-				case 1:
-					stringStack.push(String.valueOf(second - first));
-					break;
-				case 2:
-					stringStack.push(String.valueOf(first * second));
-					break;
-				case 3:
-					stringStack.push(String.valueOf(second / first));
-					break;
+    finalOutput = Double.valueOf(stringStack.pop());
 
-				}
-			}
-		}
+    return finalOutput;
+  }
 
-		finalOutput = Double.valueOf(stringStack.pop());
+  public static double polishNotationUsingDeque(String expr) {
 
-		return finalOutput;
-	}
+    String[] stringTokenArray = expr.split(" ");
 
-	public static double polishNotationUsingDeque(String expr) {
+    double finalOutput = 0.0;
 
-		String[] stringTokenArray = expr.split(" ");
+    if (expr.length() == 0) {
 
-		double finalOutput = 0.0;
+      return finalOutput;
+    }
 
-		if (expr.length() == 0) {
+    String operations = "+-*/";
 
-			return finalOutput;
+    Deque<String> stringStack = new ArrayDeque<String>();
 
-		}
+    for (String stringToken : stringTokenArray) {
 
-		String operations = "+-*/";
+      if (!operations.contains(stringToken)) {
 
-		Deque<String> stringStack = new ArrayDeque<String>();
+        stringStack.push(stringToken);
 
-		for (String stringToken : stringTokenArray)
+      } else {
 
-		{
-			if (!operations.contains(stringToken)) {
+        double first = Double.valueOf(stringStack.pop());
 
-				stringStack.push(stringToken);
+        double second = Double.valueOf(stringStack.pop());
 
-			} else {
+        int charIndex = operations.indexOf(stringToken);
 
-				double first = Double.valueOf(stringStack.pop());
+        switch (charIndex) {
+          case 0:
+            stringStack.push(String.valueOf(first + second));
+            break;
+          case 1:
+            stringStack.push(String.valueOf(second - first));
+            break;
+          case 2:
+            stringStack.push(String.valueOf(first * second));
+            break;
+          case 3:
+            stringStack.push(String.valueOf(second / first));
+            break;
+        }
+      }
+    }
 
-				double second = Double.valueOf(stringStack.pop());
+    finalOutput = Double.valueOf(stringStack.pop());
 
-				int charIndex = operations.indexOf(stringToken);
+    return finalOutput;
+  }
 
-				switch (charIndex) {
-				case 0:
-					stringStack.push(String.valueOf(first + second));
-					break;
-				case 1:
-					stringStack.push(String.valueOf(second - first));
-					break;
-				case 2:
-					stringStack.push(String.valueOf(first * second));
-					break;
-				case 3:
-					stringStack.push(String.valueOf(second / first));
-					break;
+  public static double polishNotationUsingDequeIfElse(String expr) {
 
-				}
-			}
-		}
+    String[] stringTokenArray = expr.split(" ");
 
-		finalOutput = Double.valueOf(stringStack.pop());
+    double finalOutput = 0.0;
 
-		return finalOutput;
-	}
+    if (expr.length() == 0) {
 
-	public static double polishNotationUsingDequeIfElse(String expr) {
+      return finalOutput;
+    }
 
-		String[] stringTokenArray = expr.split(" ");
+    String operations = "+-*/";
 
-		double finalOutput = 0.0;
+    Deque<String> stringStack = new ArrayDeque<String>();
 
-		if (expr.length() == 0) {
+    for (String stringToken : stringTokenArray) {
 
-			return finalOutput;
+      if (!operations.contains(stringToken)) {
 
-		}
+        stringStack.push(stringToken);
 
-		String operations = "+-*/";
+      } else {
 
-		Deque<String> stringStack = new ArrayDeque<String>();
+        double first = Double.valueOf(stringStack.pop());
 
-		for (String stringToken : stringTokenArray)
+        double second = Double.valueOf(stringStack.pop());
 
-		{
-			if (!operations.contains(stringToken)) {
+        int charIndex = operations.indexOf(stringToken);
 
-				stringStack.push(stringToken);
+        if (charIndex == 0) {
 
-			} else {
+          stringStack.push(String.valueOf(first + second));
 
-				double first = Double.valueOf(stringStack.pop());
+        } else if (charIndex == 1) {
 
-				double second = Double.valueOf(stringStack.pop());
+          stringStack.push(String.valueOf(second - first));
 
-				int charIndex = operations.indexOf(stringToken);
+        } else if (charIndex == 2) {
 
-				if (charIndex == 0) {
+          stringStack.push(String.valueOf(first * second));
 
-					stringStack.push(String.valueOf(first + second));
+        } else if (charIndex == 3) {
 
-				} else if (charIndex == 1) {
+          stringStack.push(String.valueOf(second / first));
+        }
+      }
+    }
 
-					stringStack.push(String.valueOf(second - first));
+    finalOutput = Double.valueOf(stringStack.pop());
 
-				} else if (charIndex == 2) {
-
-					stringStack.push(String.valueOf(first * second));
-
-				} else if (charIndex == 3) {
-
-					stringStack.push(String.valueOf(second / first));
-				}
-			}
-		}
-
-		finalOutput = Double.valueOf(stringStack.pop());
-
-		return finalOutput;
-	}
-
+    return finalOutput;
+  }
 }

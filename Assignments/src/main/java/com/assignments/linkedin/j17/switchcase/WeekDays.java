@@ -1,37 +1,33 @@
-/**
- * 
- */
+/** */
 package com.assignments.linkedin.j17.switchcase;
 
 /**
  * <Description>
- * 
- * @author Somendu Maiti
  *
+ * @author Somendu Maiti
  * @since 08-Aug-2025
  */
 public class WeekDays {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		WeekDays weekDays = new WeekDays();
+    WeekDays weekDays = new WeekDays();
 
-		System.out.println("Week day is : " + weekDays.getDayOfWeek(1));
-	}
+    System.out.println("Week day is : " + weekDays.getDayOfWeek(1));
+  }
 
-	public String getDayOfWeek(int day) {
-		String dayOfWeek = switch (day) {
-		case 1 -> "Monday";
-		case 2 -> "Tuesday";
+  public String getDayOfWeek(int day) {
+    String dayOfWeek =
+        switch (day) {
+          case 1 -> "Monday";
+          case 2 -> "Tuesday";
 
-		default -> "unknown";
+          default -> "unknown";
+        };
 
-		};
-
-		return dayOfWeek;
-	}
-
+    return dayOfWeek;
+  }
 }

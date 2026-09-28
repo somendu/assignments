@@ -1,54 +1,48 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.functiontrf;
 
+import com.assignments.udemy.stream.udemy.StudentDataBase;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import com.assignments.udemy.stream.udemy.StudentDataBase;
-
 /**
  * @author Somendu
- *
  * @since 23-Sep-2020
  */
 public class BiConsumerExample {
 
-	public static void printStudentNameAndActivities() {
+  public static void printStudentNameAndActivities() {
 
-		var studentList = StudentDataBase.getAllStudents();
+    var studentList = StudentDataBase.getAllStudents();
 
-		BiConsumer<String, List<String>> studentConsumer = (name, activities) -> System.out
-				.println("Name : " + name + " does " + activities);
+    BiConsumer<String, List<String>> studentConsumer =
+        (name, activities) -> System.out.println("Name : " + name + " does " + activities);
 
-		studentList.forEach(student -> {
+    studentList.forEach(
+        student -> {
+          if (student.getGender().equals("male"))
+            studentConsumer.accept(student.getName(), student.getActivities());
+        });
+  }
 
-			if (student.getGender().equals("male"))
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-				studentConsumer.accept(student.getName(), student.getActivities());
-		});
-	}
+    BiConsumer<String, String> biConsumerString =
+        (a, b) -> System.out.println("String a : " + a + " , String b: " + b);
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+    biConsumerString.accept("data", "here");
 
-		BiConsumer<String, String> biConsumerString = (a, b) -> System.out
-				.println("String a : " + a + " , String b: " + b);
+    BiConsumer<Integer, Integer> biConsumerIntegerMul =
+        (a, b) -> System.out.println("Multiplication is : " + a * b);
 
-		biConsumerString.accept("data", "here");
+    BiConsumer<Integer, Integer> biConsumerIntegerDiv =
+        (a, b) -> System.out.println("Division is : " + a / b);
 
-		BiConsumer<Integer, Integer> biConsumerIntegerMul = (a, b) -> System.out
-				.println("Multiplication is : " + a * b);
+    biConsumerIntegerMul.andThen(biConsumerIntegerDiv).accept(15, 3);
 
-		BiConsumer<Integer, Integer> biConsumerIntegerDiv = (a, b) -> System.out.println("Division is : " + a / b);
-
-		biConsumerIntegerMul.andThen(biConsumerIntegerDiv).accept(15, 3);
-
-		printStudentNameAndActivities();
-
-	}
-
+    printStudentNameAndActivities();
+  }
 }

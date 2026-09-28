@@ -1,48 +1,42 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.streams;
 
+import com.assignments.udemy.stream.udemy.Student;
+import com.assignments.udemy.stream.udemy.StudentDataBase;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import com.assignments.udemy.stream.udemy.Student;
-import com.assignments.udemy.stream.udemy.StudentDataBase;
-
 /**
  * @author Somendu
- *
  * @since 28-Sep-2020
  */
 public class StreamsExample {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		Map<String, List<String>> activitymap = StudentDataBase.getAllStudents().stream()
-				.collect(Collectors.toMap(Student::getName, Student::getActivities));
+    Map<String, List<String>> activitymap =
+        StudentDataBase.getAllStudents().stream()
+            .collect(Collectors.toMap(Student::getName, Student::getActivities));
 
-		Predicate<Student> studentGrade = student -> student.getGradeLevel() >= 3;
+    Predicate<Student> studentGrade = student -> student.getGradeLevel() >= 3;
 
-		Predicate<Student> studentGender = student -> student.getGender().equalsIgnoreCase("male");
+    Predicate<Student> studentGender = student -> student.getGender().equalsIgnoreCase("male");
 
-		Map<String, List<String>> activityFiltermap = StudentDataBase.getAllStudents().stream()
+    Map<String, List<String>> activityFiltermap =
+        StudentDataBase.getAllStudents().stream()
+            .peek(student -> System.out.println(student))
+            .filter(studentGrade)
+            .peek(student -> System.out.println(student + "Inside studentGrade "))
+            .filter(studentGender)
+            .collect(Collectors.toMap(Student::getName, Student::getActivities));
 
-				.peek(student -> System.out.println(student))
+    System.out.println(activitymap);
 
-				.filter(studentGrade)
-
-				.peek(student -> System.out.println(student + "Inside studentGrade "))
-
-				.filter(studentGender).collect(Collectors.toMap(Student::getName, Student::getActivities));
-
-		System.out.println(activitymap);
-
-		System.out.println(activityFiltermap);
-	}
-
+    System.out.println(activityFiltermap);
+  }
 }

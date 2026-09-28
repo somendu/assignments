@@ -1,39 +1,29 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.streams;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.assignments.udemy.stream.udemy.Student;
 import com.assignments.udemy.stream.udemy.StudentDataBase;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Somendu
- *
  * @since 28-Sep-2020
  */
 public class StreamFilterEx {
 
-	public static List<Student> filterFemaleStudents() {
+  public static List<Student> filterFemaleStudents() {
 
-		return StudentDataBase.getAllStudents().stream()
+    return StudentDataBase.getAllStudents().stream()
+        .filter((student -> student.getGender().equalsIgnoreCase("female")))
+        .filter(student -> student.getGpa() >= 3.6)
+        .collect(Collectors.toList());
+  }
 
-				.filter((student -> student.getGender().equalsIgnoreCase("female")))
+  public static void main(String[] args) {
 
-				.filter(student -> student.getGpa() >= 3.6)
+    // System.out.println("Filter Femal : " + filterFemaleStudents());
 
-				.collect(Collectors.toList());
-
-	}
-
-	public static void main(String[] args) {
-
-		// System.out.println("Filter Femal : " + filterFemaleStudents());
-
-		filterFemaleStudents().forEach(System.out::println);
-
-	}
-
+    filterFemaleStudents().forEach(System.out::println);
+  }
 }

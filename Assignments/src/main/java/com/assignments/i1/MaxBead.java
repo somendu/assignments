@@ -2,112 +2,108 @@ package com.assignments.i1;
 
 /**
  * @author somendu
- *
  */
 public class MaxBead {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		MaxBead solutionThree = new MaxBead();
+    MaxBead solutionThree = new MaxBead();
 
-		int[] A = { 5, 4, 0, 3, 1, 6, 2 };
+    int[] A = {5, 4, 0, 3, 1, 6, 2};
 
-		System.out.println(solutionThree.solution(A));
-	}
+    System.out.println(solutionThree.solution(A));
+  }
 
-	public int solution(int[] A) {
+  public int solution(int[] A) {
 
-		int out = 0;
+    int out = 0;
 
-		int currVal = 0;
+    int currVal = 0;
 
-		int nextVal = 0;
+    int nextVal = 0;
 
-		if (A.length == 0) {
-			return 0;
-		}
+    if (A.length == 0) {
+      return 0;
+    }
 
-		StringBuilder key = new StringBuilder();
+    StringBuilder key = new StringBuilder();
 
-		for (int i = 0; i < A.length; i++) {
+    for (int i = 0; i < A.length; i++) {
 
-			if (i == 0) {
+      if (i == 0) {
 
-				key = new StringBuilder();
+        key = new StringBuilder();
 
-				key.append(A[0]);
+        key.append(A[0]);
 
-				nextVal = A[0];
+        nextVal = A[0];
 
-				A[0] = -1;
+        A[0] = -1;
 
-				// out = outPut(nextVal, currVal, key, A);
-				while ((nextVal > 0) && !key.toString().contains(Integer.toString(A[nextVal]))) {
+        // out = outPut(nextVal, currVal, key, A);
+        while ((nextVal > 0) && !key.toString().contains(Integer.toString(A[nextVal]))) {
 
-					key.append(A[nextVal]);
+          key.append(A[nextVal]);
 
-					currVal = A[nextVal];
+          currVal = A[nextVal];
 
-					A[nextVal] = -1;
+          A[nextVal] = -1;
 
-					nextVal = currVal;
+          nextVal = currVal;
 
-					if (out < key.length()) {
+          if (out < key.length()) {
 
-						out = key.length();
+            out = key.length();
+          }
+        }
+      }
+      if (A[i] > 0) {
 
-					}
-				}
-			}
-			if (A[i] > 0) {
+        key = new StringBuilder();
 
-				key = new StringBuilder();
+        key.append(A[i]);
 
-				key.append(A[i]);
+        nextVal = A[i];
 
-				nextVal = A[i];
+        A[i] = -1;
 
-				A[i] = -1;
+        // out = outPut(nextVal, currVal, key, A);
+        while ((nextVal > 0) && !key.toString().contains(Integer.toString(A[nextVal]))) {
 
-				// out = outPut(nextVal, currVal, key, A);
-				while ((nextVal > 0) && !key.toString().contains(Integer.toString(A[nextVal]))) {
+          key.append(A[nextVal]);
 
-					key.append(A[nextVal]);
+          currVal = A[nextVal];
 
-					currVal = A[nextVal];
+          A[nextVal] = -1;
 
-					A[nextVal] = -1;
+          nextVal = currVal;
 
-					nextVal = currVal;
+          if (out < key.length()) {
 
-					if (out < key.length()) {
+            out = key.length();
+          }
+        }
+      }
+    }
 
-						out = key.length();
+    return out;
+  }
 
-					}
-				}
-			}
-		}
+  private int outPut(int nextVal, int currVal, StringBuilder key, int[] A) {
 
-		return out;
-	}
-
-	private int outPut(int nextVal, int currVal, StringBuilder key, int[] A) {
-
-		int out = 0;
-		while ((nextVal > 0) && !key.toString().contains(Integer.toString(A[nextVal]))) {
-			key.append(A[nextVal]);
-			currVal = A[nextVal];
-			A[nextVal] = -1;
-			nextVal = currVal;
-			if (out < key.length()) {
-				out = key.length();
-			}
-		}
-		return out;
-	}
-
+    int out = 0;
+    while ((nextVal > 0) && !key.toString().contains(Integer.toString(A[nextVal]))) {
+      key.append(A[nextVal]);
+      currVal = A[nextVal];
+      A[nextVal] = -1;
+      nextVal = currVal;
+      if (out < key.length()) {
+        out = key.length();
+      }
+    }
+    return out;
+  }
 }

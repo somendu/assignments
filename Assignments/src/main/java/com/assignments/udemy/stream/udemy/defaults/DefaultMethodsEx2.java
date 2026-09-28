@@ -1,91 +1,82 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.defaults;
 
+import com.assignments.udemy.stream.udemy.Student;
+import com.assignments.udemy.stream.udemy.StudentDataBase;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
-import com.assignments.udemy.stream.udemy.Student;
-import com.assignments.udemy.stream.udemy.StudentDataBase;
-
 /**
  * @author Somendu
- *
  * @since 05-Oct-2020
  */
 public class DefaultMethodsEx2 {
 
-	public static Consumer<Student> studentConsumer = (student -> System.out.println(student));
+  public static Consumer<Student> studentConsumer = (student -> System.out.println(student));
 
-	static Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
+  static Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
 
-	static Comparator<Student> gradeComparator = Comparator.comparingDouble(Student::getGradeLevel);
+  static Comparator<Student> gradeComparator = Comparator.comparingDouble(Student::getGradeLevel);
 
-	public static void sortByName(List<Student> studentList) {
+  public static void sortByName(List<Student> studentList) {
 
-		System.out.println("After Sort : ");
+    System.out.println("After Sort : ");
 
-		Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
+    Comparator<Student> nameComparator = Comparator.comparing(Student::getName);
 
-		UnaryOperator<Student> studentUnaryOperator = UnaryOperator.identity();
+    UnaryOperator<Student> studentUnaryOperator = UnaryOperator.identity();
 
-		studentList.sort(nameComparator);
+    studentList.sort(nameComparator);
 
-		studentList.forEach(studentConsumer);
-		studentList.replaceAll(studentUnaryOperator);
+    studentList.forEach(studentConsumer);
+    studentList.replaceAll(studentUnaryOperator);
+  }
 
-	}
+  public static void sortByGrade(List<Student> studentList) {
 
-	public static void sortByGrade(List<Student> studentList) {
+    System.out.println("After Sort GPA : ");
 
-		System.out.println("After Sort GPA : ");
+    Comparator<Student> gradeComparator = Comparator.comparingDouble(Student::getGradeLevel);
 
-		Comparator<Student> gradeComparator = Comparator.comparingDouble(Student::getGradeLevel);
+    studentList.sort(gradeComparator);
 
-		studentList.sort(gradeComparator);
+    studentList.forEach(studentConsumer);
+  }
 
-		studentList.forEach(studentConsumer);
+  public static void compareChaining(List<Student> studentList) {
 
-	}
+    System.out.println("After compareChaining : ");
 
-	public static void compareChaining(List<Student> studentList) {
+    studentList.sort(gradeComparator.thenComparing(nameComparator));
 
-		System.out.println("After compareChaining : ");
+    studentList.forEach(studentConsumer);
+  }
 
-		studentList.sort(gradeComparator.thenComparing(nameComparator));
+  public static void sortWithNullValues(List<Student> studentList) {
 
-		studentList.forEach(studentConsumer);
+    System.out.println("After sortWithNullValues nullsLast: ");
 
-	}
+    Comparator<Student> studentComparator = Comparator.nullsLast(nameComparator);
 
-	public static void sortWithNullValues(List<Student> studentList) {
+    studentList.sort(studentComparator);
 
-		System.out.println("After sortWithNullValues nullsLast: ");
+    studentList.forEach(studentConsumer);
+  }
 
-		Comparator<Student> studentComparator = Comparator.nullsLast(nameComparator);
+  public static void main(String[] args) {
 
-		studentList.sort(studentComparator);
+    List<Student> studentList = StudentDataBase.getAllStudents();
+    System.out.println("Before Sort : ");
+    studentList.forEach(studentConsumer);
 
-		studentList.forEach(studentConsumer);
+    // sortByName(studentList);
 
-	}
+    // sortByGrade(studentList);
 
-	public static void main(String[] args) {
+    // compareChaining(studentList);
 
-		List<Student> studentList = StudentDataBase.getAllStudents();
-		System.out.println("Before Sort : ");
-		studentList.forEach(studentConsumer);
-
-		// sortByName(studentList);
-
-		// sortByGrade(studentList);
-
-		// compareChaining(studentList);
-
-		sortWithNullValues(studentList);
-	}
-
+    sortWithNullValues(studentList);
+  }
 }

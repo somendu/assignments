@@ -1,84 +1,76 @@
-/**
- * 
- */
+/** */
 package com.assignments.self.codeclinic.location;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-
 import org.json.JSONObject;
 
 /**
  * @author somendu
- *
  */
 public class LocationFinder {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		String location = "";
-		JSONObject jsonObject = null;
-		String mapLink = "";
+    String location = "";
+    JSONObject jsonObject = null;
+    String mapLink = "";
 
-		location = getLocation("2409:4043:68f:9430::56a:b8b1");
-		jsonObject = new JSONObject(location);
+    location = getLocation("2409:4043:68f:9430::56a:b8b1");
+    jsonObject = new JSONObject(location);
 
-		mapLink = "https://www.google.com/maps/?q="
-				+ jsonObject.getString("loc");
+    mapLink = "https://www.google.com/maps/?q=" + jsonObject.getString("loc");
 
-		System.out.println("Your City : " + jsonObject.getString("city"));
-		System.out.println("Your Country : " + jsonObject.getString("country"));
-		System.out.println("Your Location : " + mapLink);
-		System.out.println(
-				"Your Time Zone : " + jsonObject.getString("timezone"));
-		System.out.println("Your Region : " + jsonObject.getString("region"));
+    System.out.println("Your City : " + jsonObject.getString("city"));
+    System.out.println("Your Country : " + jsonObject.getString("country"));
+    System.out.println("Your Location : " + mapLink);
+    System.out.println("Your Time Zone : " + jsonObject.getString("timezone"));
+    System.out.println("Your Region : " + jsonObject.getString("region"));
+  }
 
-	}
+  // Data {country=NL, loc=51.9225,4.4792,
+  // hostname=ip-213-127-67-119.ip.prioritytelecom.net,
+  // city=Rotterdam, org=AS6830 Liberty Global B.V.,
+  // timezone=Europe/Amsterdam,
+  // ip=213.127.67.119,
+  // postal=3012, readme=https://ipinfo.io/missingauth, region=South Holland}
 
-	// Data {country=NL, loc=51.9225,4.4792,
-	// hostname=ip-213-127-67-119.ip.prioritytelecom.net,
-	// city=Rotterdam, org=AS6830 Liberty Global B.V.,
-	// timezone=Europe/Amsterdam,
-	// ip=213.127.67.119,
-	// postal=3012, readme=https://ipinfo.io/missingauth, region=South Holland}
+  public static String getLocation(String ip) {
 
-	public static String getLocation(String ip) {
+    URL url;
+    String respoonse = "";
 
-		URL url;
-		String respoonse = "";
+    if (!ip.equals("")) ip = "/" + ip;
 
-		if (!ip.equals(""))
-			ip = "/" + ip;
+    try {
 
-		try {
+      String a = "https://ipinfo.io" + ip + "/json";
 
-			String a = "https://ipinfo.io" + ip + "/json";
+      url = URI.create(a).toURL();
 
-			url = new URL(a);
+      URLConnection urlConnection = url.openConnection();
 
-			URLConnection urlConnection = url.openConnection();
+      BufferedReader bufferedReader =
+          new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
-			BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(urlConnection.getInputStream()));
+      String inputLine;
 
-			String inputLine;
+      while ((inputLine = bufferedReader.readLine()) != null) {
+        respoonse = respoonse + inputLine;
+      }
 
-			while ((inputLine = bufferedReader.readLine()) != null) {
-				respoonse = respoonse + inputLine;
-			}
+      bufferedReader.close();
 
-			bufferedReader.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return respoonse;
-	}
-
+    return respoonse;
+  }
 }

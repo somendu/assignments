@@ -1,6 +1,4 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.parallelstreams;
 
 import java.util.List;
@@ -9,43 +7,41 @@ import java.util.stream.IntStream;
 
 /**
  * @author Somendu
- *
  * @since 02-Oct-2020
  */
 public class ParallelStreamBoxedEx {
 
-	public static int sequentialSum(List<Integer> integerList) {
+  public static int sequentialSum(List<Integer> integerList) {
 
-		long startTime = System.currentTimeMillis();
+    long startTime = System.currentTimeMillis();
 
-		int sum = integerList.stream().reduce(0, (a, b) -> a + b);
+    int sum = integerList.stream().reduce(0, (a, b) -> a + b);
 
-		long duration = System.currentTimeMillis() - startTime;
+    long duration = System.currentTimeMillis() - startTime;
 
-		System.out.println("Sequential Stream Time: " + duration);
-		return sum;
-	}
+    System.out.println("Sequential Stream Time: " + duration);
+    return sum;
+  }
 
-	public static int parallelSum(List<Integer> integerList) {
+  public static int parallelSum(List<Integer> integerList) {
 
-		long startTime = System.currentTimeMillis();
+    long startTime = System.currentTimeMillis();
 
-		int sum = integerList.parallelStream().reduce(0, (a, b) -> a + b);
+    int sum = integerList.parallelStream().reduce(0, (a, b) -> a + b);
 
-		long duration = System.currentTimeMillis() - startTime;
+    long duration = System.currentTimeMillis() - startTime;
 
-		System.out.println("Parallel Stream Time: " + duration);
-		return sum;
-	}
+    System.out.println("Parallel Stream Time: " + duration);
+    return sum;
+  }
 
-	public static void main(String[] args) {
+  public static void main(String[] args) {
 
-		List<Integer> integerList = IntStream.rangeClosed(1, 10000).boxed()
-				.collect(Collectors.toList());
+    List<Integer> integerList =
+        IntStream.rangeClosed(1, 10000).boxed().collect(Collectors.toList());
 
-		sequentialSum(integerList);
+    sequentialSum(integerList);
 
-		parallelSum(integerList);
-	}
-
+    parallelSum(integerList);
+  }
 }

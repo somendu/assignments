@@ -1,37 +1,33 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.functiontrf;
 
 /**
  * @author Somendu
- *
  * @since 22-Sep-2020
  */
 public class RunnableLambaExample {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
 
-		Runnable runnable = new Runnable() {
+    Runnable runnable =
+        new Runnable() {
 
-			@Override
-			public void run() {
+          @Override
+          public void run() {
 
-				System.out.println("Running ");
+            System.out.println("Running ");
+          }
+        };
 
-			}
-		};
+    new Thread(runnable).start();
 
-		new Thread(runnable).start();
+    Runnable runnable1 = () -> System.out.println("Running second time");
 
-		Runnable runnable1 = () -> System.out.println("Running second time");
+    new Thread(runnable1).start();
 
-		new Thread(runnable1).start();
-
-		new Thread(() -> System.out.println("Running Third time")).start();
-	}
-
+    new Thread(() -> System.out.println("Running Third time")).start();
+  }
 }

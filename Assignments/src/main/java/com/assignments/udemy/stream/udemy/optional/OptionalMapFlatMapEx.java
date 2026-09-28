@@ -1,75 +1,74 @@
-/**
- * 
- */
+/** */
 package com.assignments.udemy.stream.udemy.optional;
-
-import java.util.Optional;
 
 import com.assignments.udemy.stream.udemy.Bike;
 import com.assignments.udemy.stream.udemy.Student;
 import com.assignments.udemy.stream.udemy.StudentDataBase;
+import java.util.Optional;
 
 /**
  * @author Somendu
- *
  * @since 03-Oct-2020
  */
 public class OptionalMapFlatMapEx {
 
-	// filter
-	public static void optionalFilter() {
+  // filter
+  public static void optionalFilter() {
 
-		Optional<Student> studentOtional = Optional.ofNullable(StudentDataBase.studentDaveSupplier.get());
+    Optional<Student> studentOtional =
+        Optional.ofNullable(StudentDataBase.studentDaveSupplier.get());
 
-		studentOtional.filter(student -> student.getGpa() <= 3.5)
-				.ifPresentOrElse(student -> System.out.println(student), new Runnable() {
+    studentOtional
+        .filter(student -> student.getGpa() <= 3.5)
+        .ifPresentOrElse(
+            student -> System.out.println(student),
+            new Runnable() {
 
-					@Override
-					public void run() {
-						System.out.println("Empty");
+              @Override
+              public void run() {
+                System.out.println("Empty");
+              }
+            });
+    // .ifPresent(student -> System.out.println(student));
 
-					}
-				});
-		// .ifPresent(student -> System.out.println(student));
+  }
 
-	}
+  // map
+  public static void optionalMapFilter() {
 
-	// map
-	public static void optionalMapFilter() {
+    Optional<Student> studentOtional =
+        Optional.ofNullable(StudentDataBase.studentDaveSupplier.get());
 
-		Optional<Student> studentOtional = Optional.ofNullable(StudentDataBase.studentDaveSupplier.get());
+    if (studentOtional.isPresent()) {
+      Optional<String> studentString =
+          studentOtional
+              .filter(student -> student.getGender().equalsIgnoreCase("female"))
+              .map(Student::getName);
 
-		if (studentOtional.isPresent()) {
-			Optional<String> studentString = studentOtional
-					.filter(student -> student.getGender().equalsIgnoreCase("female")).map(Student::getName);
+      System.out.println(studentString.get());
+    }
+  }
 
-			System.out.println(studentString.get());
+  // FlatMAp
 
-		}
+  public static void optionalFlatMapFilter() {
 
-	}
+    Optional<Student> studentOtional =
+        Optional.ofNullable(StudentDataBase.studentAdamSupplier.get());
 
-	// FlatMAp
+    Optional<String> studentString =
+        studentOtional
+            .filter(student -> student.getGpa() >= 3.5)
+            .flatMap(Student::getBike)
+            .map(Bike::getName);
 
-	public static void optionalFlatMapFilter() {
+    System.out.println(studentString.get());
+  }
 
-		Optional<Student> studentOtional = Optional.ofNullable(StudentDataBase.studentAdamSupplier.get());
+  public static void main(String[] args) {
 
-		Optional<String> studentString = studentOtional.filter(student -> student.getGpa() >= 3.5)
-				.flatMap(Student::getBike)
-
-				.map(Bike::getName);
-
-		System.out.println(studentString.get());
-
-	}
-
-	public static void main(String[] args) {
-
-		// optionalFilter();
-		// optionalMapFilter();
-		optionalFlatMapFilter();
-
-	}
-
+    // optionalFilter();
+    // optionalMapFilter();
+    optionalFlatMapFilter();
+  }
 }
